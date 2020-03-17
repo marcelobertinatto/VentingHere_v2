@@ -25,6 +25,8 @@ html {
 
 
     /* Slider */
+    
+    
 .slick-slider
 {
     position: relative;
@@ -1213,7 +1215,7 @@ ul.pagination .active a {
 }
 
 .bg-1 {
-  /* background: url("../images/home/hero.jpg"); */
+  background: url("../src/assets/img/hero.jpg");
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -1409,7 +1411,12 @@ ul.pagination .active a {
 }
 
 .hero-area {
-  padding: 100px 0 0;
+  height: 517px;
+  left: -359px;
+  position: relative;
+  width: 1841px;
+  font: 16px / 24px Muli, sans-serif;
+  padding: 100px 0px 0px;
 }
 
 .hero-area .content-block {
@@ -2917,7 +2924,43 @@ article.single-post p {
 }
 
 .footer {
-  background: #232425;
+  /* background: #232425; */
+  box-sizing: border-box;
+    color: rgb(33, 37, 41);
+    height: 401px;
+    text-align: left;
+    width: 1841px;
+    background: rgb(35, 36, 37) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(33, 37, 41);
+    font: 16px / 24px Muli, sans-serif;
+    outline: rgb(33, 37, 41) none 0px;
+    padding: 70px 0px;
+}
+
+.footer:before {
+  box-sizing: border-box;
+  color: rgb(33, 37, 41);
+  text-align: left;
+  text-decoration: none solid rgb(33, 37, 41);
+  text-size-adjust: 100%;
+  column-rule-color: rgb(33, 37, 41);
+  caret-color: rgb(33, 37, 41);
+  border: 0px none rgb(33, 37, 41);
+  font: 16px / 24px Muli, sans-serif;
+  outline: rgb(33, 37, 41) none 0px;
+}
+
+.footer:after {
+  box-sizing: border-box;
+  color: rgb(33, 37, 41);
+  text-align: left;
+  text-decoration: none solid rgb(33, 37, 41);
+  text-size-adjust: 100%;
+  column-rule-color: rgb(33, 37, 41);
+  caret-color: rgb(33, 37, 41);
+  border: 0px none rgb(33, 37, 41);
+  font: 16px / 24px Muli, sans-serif;
+  outline: rgb(33, 37, 41) none 0px;
 }
 
 .footer .block h4 {
@@ -2991,9 +3034,25 @@ article.single-post p {
 }
 
 .footer-bottom {
-  position: relative;
+  /* position: relative;
   background: #363839;
-  padding: 25px 0;
+  padding: 25px 0; */
+  bottom: 0px;
+    box-sizing: border-box;
+    color: rgb(33, 37, 41);
+    height: 74px;
+    left: 0px;
+    right: -359px;
+    position: relative;
+    right: 0px;
+    text-align: left;
+    top: 0px;
+    width: 1841px;
+    background: rgb(54, 56, 57) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(33, 37, 41);
+    font: 16px / 24px Muli, sans-serif;
+    outline: rgb(33, 37, 41) none 0px;
+    padding: 25px 0px;
 }
 
 @media (max-width: 480px) {
@@ -3027,7 +3086,8 @@ article.single-post p {
 
 .top-to {
   position: absolute;
-  right: 20px;
+  /* right: 20px; */
+  /* right: -340px; */
   bottom: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
