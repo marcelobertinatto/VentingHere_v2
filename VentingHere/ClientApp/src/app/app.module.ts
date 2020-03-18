@@ -6,22 +6,24 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
 import { HomeBannerComponent } from './home-banner/home-banner.component';
+import { HomeBodyComponent } from './home-body/home-body.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
    declarations: [
       AppComponent,
       NavMenuComponent,
-      HomeComponent,
-      HomeBannerComponent
+      HomeBannerComponent,
+      HomeBodyComponent,
+      FooterComponent
    ],
    imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+      BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' }
+      { path: '', component: HomeBodyComponent, pathMatch: 'full' }
     ])
   ],
   providers: [],
