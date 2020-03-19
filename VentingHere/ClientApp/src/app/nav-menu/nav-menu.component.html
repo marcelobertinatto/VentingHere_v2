@@ -18,8 +18,9 @@
 								<a href="#" id="A_16">Dashboard</a>
 							</li>
 							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" href="#"
-								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="A_18">Pages<span><i
+								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+									aria-haspopup="true" aria-expanded="false" href="#" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false" id="A_18">Pages<span><i
 											class="fa fa-angle-down"></i></span></a>
 								<!-- Dropdown list -->
 								<div class="dropdown-menu">
@@ -33,23 +34,24 @@
 									<a href="#" class="dropdown-item">Single Post</a>
 								</div>
 							</li>
-							<li class="nav-item dropdown" >
-								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" href="#"
-									data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-									id="A_31">Listing<span><i class="fa fa-angle-down"></i></span></a>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+									aria-haspopup="true" aria-expanded="false" href="#" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false" id="A_31">Listing<span><i
+											class="fa fa-angle-down"></i></span></a>
 								<!-- Dropdown list -->
-								<div class="dropdown-menu" >
-									<a href="#" class="dropdown-item" >Action</a>
-									<a href="#" class="dropdown-item" >Another
+								<div class="dropdown-menu">
+									<a href="#" class="dropdown-item">Action</a>
+									<a href="#" class="dropdown-item">Another
 										action</a>
-									<a href="#" class="dropdown-item" >Something else
+									<a href="#" class="dropdown-item">Something else
 										here</a>
 								</div>
 							</li>
 						</ul>
 						<ul id="UL_38">
 							<li id="LI_39">
-								<a href="#" id="A_40">Login</a>
+								<a href="#" id="A_40" (click)="open(mymodal)">Login</a>
 							</li>
 							<li id="LI_41">
 								<a href="#" id="A_42">Add Listing</a>
@@ -61,3 +63,18 @@
 		</div>
 	</div>
 </section>
+
+<ng-template #mymodal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Bootstrap Modal</h4>
+		<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+			<span aria-hidden="true">×</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		This is example from ItSolutionStuff.com
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+	</div>
+</ng-template>

@@ -30,22 +30,7 @@
               "src/styles.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/popper.js/dist/umd/popper.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "node_modules/jquery-ui-dist/jquery-ui.js",
-              "src/assets/js/common.js.download",
-              "src/assets/js/util.js.download",
-              "src/assets/js/tether.min.js.download",
-              "src/assets/js/jquery.raty-fa.js.download",
-              "src/assets/js/popper.min.js.download",
-              "src/assets/js/bootstrap-slider.min.js.download",
-              "src/assets/js/slick.min.js.download",
-              "src/assets/js/jquery.nice-select.min.js.download",
-              "src/assets/js/jquery.fancybox.pack.js.download",
-              "src/assets/js/SmoothScroll.min.js.download",
-              "src/assets/js/js",
-              "src/assets/js/scripts.js.download"     
+                 
             ]
           },
           "configurations": {
