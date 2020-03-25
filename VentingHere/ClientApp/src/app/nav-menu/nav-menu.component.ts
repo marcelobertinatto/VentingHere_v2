@@ -1,4 +1,4 @@
-import { Component, Input, TemplateRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, HostListener } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { UserLoginComponent } from '../user-login/user-login.component';
 import { ModalService } from '../services/Modal.service';
@@ -16,16 +16,34 @@ const ngbModalOptions: NgbModalOptions = {
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.css']
 })
-export class NavMenuComponent implements OnInit {
+export class NavMenuComponent implements OnInit, AfterViewInit {
   @ViewChild(UserLoginComponent) userLoginComponent: UserLoginComponent;
+  @ViewChild('stickyMenu') menuElement: ElementRef;
 
   isExpanded = false;
   title = 'appBootstrap';
   closeResult: string;
+  sticky = false;
+  menuPosition: any;
 
   constructor(private modalService: ModalService) { }
   ngOnInit(): void {
   }
+
+  ngAfterViewInit() {
+    this.menuPosition = this.menuElement.nativeElement.offsetTop;
+}
+
+@HostListener('window:scroll', ['$event'])
+    handleScroll(){
+        const windowScroll = window.pageYOffset;
+        if (windowScroll >= this.menuPosition) {
+            this.sticky = true;
+        } else {
+            this.sticky = false;
+        }
+    }
+
   collapse() {
     this.isExpanded = false;
   }
@@ -36,7 +54,7 @@ export class NavMenuComponent implements OnInit {
 
   open() {
     this.modalService.open(UserLoginComponent, ngbModalOptions);
-  }  
+  } 
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
