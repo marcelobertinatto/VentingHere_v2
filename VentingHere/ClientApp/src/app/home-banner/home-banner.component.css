@@ -28,12 +28,6 @@
     margin-bottom: 15px;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: "Muli", sans-serif;
-    font-weight: 600;
-    color: #333;
-}
-
 .hero-area .content-block p, .hero-area-2 .content-block p {
     color: #fff;
     font-size: 20px;
@@ -78,13 +72,6 @@ h1, h2, h3, h4, h5, h6 {
 a {
     transition: all .3s ease-in 0s;
     color: #000;
-}
-
-p, li, input, select, button {
-    font-family: "Muli", sans-serif;
-    color: #666;
-    font-size: 14px;
-    font-weight: 400;
 }
 
 .list-inline-item {
