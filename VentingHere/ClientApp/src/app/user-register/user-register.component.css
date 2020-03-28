@@ -600,25 +600,6 @@
     font: 13px Quicksand, sans-serif;
 }/*#DIV_1453:before, #DIV_1469:before*/
 
-#DIV_1471 {
-    box-sizing: border-box;
-    float: left;
-    position: relative;
-    text-align: center;
-    width: 100%;
-    font: 13px Quicksand, sans-serif;
-}/*#DIV_1471*/
-
-#DIV_1471:after {
-    text-align: center;
-    font: 13px Quicksand, sans-serif;
-}/*#DIV_1471:after*/
-
-#DIV_1471:before {
-    text-align: center;
-    font: 13px Quicksand, sans-serif;
-}/*#DIV_1471:before*/
-
 #FORM_1472 {
     box-sizing: border-box;
     text-align: center;
@@ -784,25 +765,6 @@
     font: 13.3333px Arial;
     outline: rgb(255, 255, 255) none 0px;
 }/*#SPAN_1482:before*/
-
-#DIV_1470 {
-    box-sizing: border-box;
-    display: none;
-    text-align: center;
-    width: 100%;
-    font: 13px Quicksand, sans-serif;
-    padding: 20px 0px;
-}/*#DIV_1470*/
-
-#DIV_1470:after {
-    text-align: center;
-    font: 13px Quicksand, sans-serif;
-}/*#DIV_1470:after*/
-
-#DIV_1470:before {
-    text-align: center;
-    font: 13px Quicksand, sans-serif;
-}/*#DIV_1470:before*/
 
 #INPUT_1476, #INPUT_1480 {
     color: rgb(102, 102, 102);
