@@ -24,6 +24,11 @@ constructor(private modal: NgbModal) { }
      return modalView;
  }
 
+ register(content: any, config: NgbModalOptions = {}): NgbModalRef {
+  const modalView = this.modal.open(content, config);
+  return modalView;
+ }
+
  close() {
   this.modal.dismissAll();
 }

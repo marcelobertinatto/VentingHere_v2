@@ -1,3 +1,4 @@
+import { UserRegisterComponent } from './../user-register/user-register.component';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, HostListener } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { UserLoginComponent } from '../user-login/user-login.component';
@@ -18,6 +19,7 @@ const ngbModalOptions: NgbModalOptions = {
 })
 export class NavMenuComponent implements OnInit, AfterViewInit {
   @ViewChild(UserLoginComponent) userLoginComponent: UserLoginComponent;
+  @ViewChild(UserRegisterComponent) userRegisterComponent: UserRegisterComponent;
   @ViewChild('stickyMenu') menuElement: ElementRef;
 
   isExpanded = false;
@@ -54,7 +56,11 @@ export class NavMenuComponent implements OnInit, AfterViewInit {
 
   open() {
     this.modalService.open(UserLoginComponent, ngbModalOptions);
-  } 
+  }
+
+  register() {
+    this.modalService.register(UserRegisterComponent, ngbModalOptions);
+  }
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {

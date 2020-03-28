@@ -11,6 +11,7 @@ import { HomeBodyComponent } from './home-body/home-body.component';
 import { FooterComponent } from './footer/footer.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import {NgbModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
+import { UserRegisterComponent } from './user-register/user-register.component';
 
 @NgModule({
    declarations: [
@@ -19,10 +20,11 @@ import {NgbModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
       HomeBannerComponent,
       HomeBodyComponent,
       FooterComponent,
-      UserLoginComponent
+      UserLoginComponent,
+      UserRegisterComponent
    ],
    imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+      BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
