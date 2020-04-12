@@ -46,36 +46,63 @@
             <div id="DIV_1453">
                 <div id="DIV_1454">
                     <div id="DIV_1455">
-                        <form method="post" name="loginform" id="FORM_1456">
+                        <form [formGroup]="loginForm" id="FORM_1456">
                             <label id="LABEL_1457">
                                 Username or Email Address *
                             </label>
-                            <input name="email" type="text" id="INPUT_1458" />
+                            <input formControlName="userEmail" class="form-control" type="text" id="userEmail" [ngClass]="{'is-invalid': loginForm.get('userEmail').errors,
+                            'is-valid':loginForm.get('userEmail').valid}" />
+                            <div *ngIf="loginForm.get('userEmail').hasError('required') && loginForm.get('userEmail').touched"
+                                class="invalid-feedback mt-2">
+                                Email is MANDATORY!
+                            </div>
+                            <div class="invalid-feedback mt-2"
+                                *ngIf="loginForm.get('userEmail').hasError('email')">       
+                                Enter a valid email address!
+                            </div>
                             <label id="LABEL_1459">
                                 Password *
                             </label>
-                            <input name="password" type="password" id="INPUT_1460" />
-                            <button type="submit" id="BUTTON_1461">
+                            <input formControlName="userPassword" class="form-control" type="password" id="userPassword"
+                                [ngClass]="{'is-invalid': loginForm.get('userPassword').errors,
+                            'is-valid':loginForm.get('userPassword').valid}" />
+                            <div *ngIf="loginForm.get('userPassword').hasError('required') 
+                                  && loginForm.get('userPassword').touched" class="invalid-feedback mt-2">
+                                Password is MANDATORY!
+                            </div>
+                            <div class="invalid-feedback mt-2"
+                                *ngIf="loginForm.get('userPassword').hasError('hasNumber')">      
+                                The password must contain at least one number!
+                            </div>
+                            <div class="invalid-feedback mt-2"
+                                *ngIf="loginForm.get('userPassword').hasError('hasLetter')">      
+                                The password must contain at least one letter!
+                            </div>
+                            <div class="invalid-feedback mt-2"
+                                *ngIf="loginForm.get('userPassword').hasError('minlenght')">      
+                                The password must contain at least 6 characters!
+                            </div>
+                            <button type="submit" (click)="submit()" id="BUTTON_1461">
                                 <span id="SPAN_1462">Log In</span>
                             </button>
                             <div id="DIV_1463">
                             </div>
                             <div id="DIV_1464">
-                                <input id="INPUT_1465" type="checkbox" name="check" />
                                 <label for="check-a" id="LABEL_1466">
                                     Remember me
                                 </label>
+                                <input formControlName="rememberMe" id="INPUT_1465" id="rememberMe" type="checkbox" name="check" />                               
                             </div>
                         </form>
                         <div id="DIV_1467">
                             <a href="http://citybook.kwst.net/index.html#" id="A_1468">Lost Your Password?</a>
                         </div>
                     </div>
-                </div>                
+                </div>
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="close()">Ok</button>
+        <button type="button" class="btn btn-outline-dark" (click)="close()">Close</button>
     </div>
 </ng-container>

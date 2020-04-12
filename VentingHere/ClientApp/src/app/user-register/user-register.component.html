@@ -26,23 +26,58 @@
           <a href="" id="A_1452"><i class="fas fa-user-plus"></i> Register</a>
         </li>
       </ul>
-      <form method="post" name="registerform" id="FORM_1472">
+      <form [formGroup]="registerform" id="FORM_1472">
         <label id="LABEL_1473">
           First Name *
         </label>
-        <input name="name" type="text" id="INPUT_1474" />
+        <input formControlName="firstName" class="form-control" name="name" type="text" id="firstName" [ngClass]="{'is-invalid': registerform.get('firstName').errors, 'is-valid':registerform.get('firstName').valid}" />
+        <div *ngIf="registerform.get('firstName').hasError('required') && registerform.get('firstName').touched"
+            class="invalid-feedback mt-2">
+            First Name is MANDATORY!
+        </div>
         <label id="LABEL_1475">
           Second Name *
         </label>
-        <input name="name2" type="text" id="INPUT_1476" />
+        <input formControlName="secondName" class="form-control" name="name" type="text" id="secondName" [ngClass]="{'is-invalid': registerform.get('secondName').errors, 'is-valid':registerform.get('secondName').valid}" />
+        <div *ngIf="registerform.get('secondName').hasError('required') && registerform.get('secondName').touched"
+            class="invalid-feedback mt-2">
+            Second Name is MANDATORY!
+        </div>
         <label id="LABEL_1477">
           Email Address *
         </label>
-        <input name="email" type="text" id="INPUT_1478" />
+        <input formControlName="userEmail" class="form-control" type="text" id="userEmail" [ngClass]="{'is-invalid': registerform.get('userEmail').errors,
+            'is-valid':registerform.get('userEmail').valid}" />
+        <div *ngIf="registerform.get('userEmail').hasError('required') && registerform.get('userEmail').touched"
+            class="invalid-feedback mt-2">
+            Email is MANDATORY!
+        </div>
+        <div class="invalid-feedback mt-2"
+            *ngIf="registerform.get('userEmail').hasError('email')">       
+            Enter a valid email address!
+        </div>
         <label id="LABEL_1479">
           Password *
         </label>
-        <input name="password" type="password" id="INPUT_1480" />
+        <input formControlName="userPassword" class="form-control" type="password" id="userPassword"
+              [ngClass]="{'is-invalid': registerform.get('userPassword').errors,
+              'is-valid':registerform.get('userPassword').valid}" />
+        <div *ngIf="registerform.get('userPassword').hasError('required') 
+              && registerform.get('userPassword').touched" class="invalid-feedback mt-2">
+            Password is MANDATORY!
+        </div>
+        <div class="invalid-feedback mt-2"
+            *ngIf="registerform.get('userPassword').hasError('hasNumber')">      
+            The password must contain at least one number!
+        </div>
+        <div class="invalid-feedback mt-2"
+            *ngIf="registerform.get('userPassword').hasError('hasLetter')">      
+            The password must contain at least one letter!
+        </div>
+        <div class="invalid-feedback mt-2"
+            *ngIf="registerform.get('userPassword').hasError('minlenght')">      
+            The password must contain at least 6 characters!
+        </div>
         <button type="submit" id="BUTTON_1481">
           <span id="SPAN_1482">Register</span>
         </button>
