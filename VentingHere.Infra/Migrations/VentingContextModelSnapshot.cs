@@ -245,6 +245,8 @@ namespace VentingHere.Infra.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<string>("NickName");
+
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
 

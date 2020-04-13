@@ -13,6 +13,7 @@ import { UserLoginComponent } from './user-login/user-login.component';
 import {NgbModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import { UserRegisterComponent } from './user-register/user-register.component';
 import { Authinterceptor } from './services/auth/Authinterceptor';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
    declarations: [
@@ -34,7 +35,8 @@ import { Authinterceptor } from './services/auth/Authinterceptor';
     ]),
     NgbModule,
     NgbAlertModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SweetAlert2Module.forRoot()
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

@@ -28,57 +28,57 @@
       </ul>
       <form [formGroup]="registerform" id="FORM_1472">
         <label id="LABEL_1473">
-          First Name *
+          User Name *
         </label>
-        <input formControlName="firstName" class="form-control" name="name" type="text" id="firstName" [ngClass]="{'is-invalid': registerform.get('firstName').errors, 'is-valid':registerform.get('firstName').valid}" />
-        <div *ngIf="registerform.get('firstName').hasError('required') && registerform.get('firstName').touched"
+        <input formControlName="name" class="form-control" name="name" type="text" id="name" [ngClass]="{'is-invalid': registerform.get('name').errors, 'is-valid':registerform.get('name').valid}" />
+        <div *ngIf="registerform.get('name').hasError('required') && registerform.get('name').touched"
             class="invalid-feedback mt-2">
-            First Name is MANDATORY!
+            User Name is MANDATORY!
         </div>
         <label id="LABEL_1475">
-          Second Name *
+          Nick Name *
         </label>
-        <input formControlName="secondName" class="form-control" name="name" type="text" id="secondName" [ngClass]="{'is-invalid': registerform.get('secondName').errors, 'is-valid':registerform.get('secondName').valid}" />
-        <div *ngIf="registerform.get('secondName').hasError('required') && registerform.get('secondName').touched"
+        <input formControlName="userName" class="form-control" name="name" type="text" id="userName" [ngClass]="{'is-invalid': registerform.get('userName').errors, 'is-valid':registerform.get('userName').valid}" />
+        <div *ngIf="registerform.get('userName').hasError('required') && registerform.get('userName').touched"
             class="invalid-feedback mt-2">
-            Second Name is MANDATORY!
+            Nick Name is MANDATORY!
         </div>
         <label id="LABEL_1477">
           Email Address *
         </label>
-        <input formControlName="userEmail" class="form-control" type="text" id="userEmail" [ngClass]="{'is-invalid': registerform.get('userEmail').errors,
-            'is-valid':registerform.get('userEmail').valid}" />
-        <div *ngIf="registerform.get('userEmail').hasError('required') && registerform.get('userEmail').touched"
+        <input formControlName="email" class="form-control" type="text" id="email" [ngClass]="{'is-invalid': registerform.get('email').errors,
+            'is-valid':registerform.get('email').valid}" />
+        <div *ngIf="registerform.get('email').hasError('required') && registerform.get('email').touched"
             class="invalid-feedback mt-2">
             Email is MANDATORY!
         </div>
         <div class="invalid-feedback mt-2"
-            *ngIf="registerform.get('userEmail').hasError('email')">       
+            *ngIf="registerform.get('email').hasError('email')">       
             Enter a valid email address!
         </div>
         <label id="LABEL_1479">
           Password *
         </label>
-        <input formControlName="userPassword" class="form-control" type="password" id="userPassword"
-              [ngClass]="{'is-invalid': registerform.get('userPassword').errors,
-              'is-valid':registerform.get('userPassword').valid}" />
-        <div *ngIf="registerform.get('userPassword').hasError('required') 
-              && registerform.get('userPassword').touched" class="invalid-feedback mt-2">
+        <input formControlName="password" class="form-control" type="password" id="password"
+              [ngClass]="{'is-invalid': registerform.get('password').errors,
+              'is-valid':registerform.get('password').valid}" />
+        <div *ngIf="registerform.get('password').hasError('required') 
+              && registerform.get('password').touched" class="invalid-feedback mt-2">
             Password is MANDATORY!
         </div>
         <div class="invalid-feedback mt-2"
-            *ngIf="registerform.get('userPassword').hasError('hasNumber')">      
+            *ngIf="registerform.get('password').hasError('hasNumber')">      
             The password must contain at least one number!
         </div>
         <div class="invalid-feedback mt-2"
-            *ngIf="registerform.get('userPassword').hasError('hasLetter')">      
+            *ngIf="registerform.get('password').hasError('hasLetter')">      
             The password must contain at least one letter!
         </div>
         <div class="invalid-feedback mt-2"
-            *ngIf="registerform.get('userPassword').hasError('minlenght')">      
+            *ngIf="registerform.get('password').hasError('minlenght')">      
             The password must contain at least 6 characters!
         </div>
-        <button type="submit" id="BUTTON_1481">
+        <button type="submit" id="BUTTON_1481" (click)="register()">
           <span id="SPAN_1482">Register</span>
         </button>
       </form>
