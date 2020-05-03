@@ -1,0 +1,106 @@
+.customSection {
+    padding: 70px 0;    
+}
+
+.bg-gray {
+    background: #F5F5F5;
+}
+
+.card_custom {
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+}
+
+.img_51 {
+    width: 130px;
+    height: 131.406px;
+    border: 5px solid rgb(244, 247, 249);
+    border-radius: 50%;
+    box-sizing: border-box;
+    color: rgb(33, 37, 41);
+    text-align: center;
+    text-decoration: none solid rgb(33, 37, 41);
+    text-size-adjust: 100%;
+    vertical-align: middle;
+}
+
+.h5_custom {
+    box-sizing: border-box;
+    color: rgb(51, 51, 51);
+    text-align: center;
+    text-decoration: none solid rgb(51, 51, 51);
+    text-size-adjust: 100%;
+    column-rule-color: rgb(51, 51, 51);
+    perspective-origin: 145px 12px;
+    transform-origin: 145px 12px;
+    caret-color: rgb(51, 51, 51);
+    border: 0px none rgb(51, 51, 51);
+    font: 600 20px / 24px Muli, sans-serif;
+    margin: 0px 0px 8px;
+    outline: rgb(51, 51, 51) none 0px;
+}
+
+.p_custom {
+    box-sizing: border-box;
+    color: rgb(136, 136, 136);
+    text-align: center;
+    text-decoration: none solid rgb(136, 136, 136);
+    text-size-adjust: 100%;
+    column-rule-color: rgb(136, 136, 136);
+    perspective-origin: 145px 10.5px;
+    transform-origin: 145px 10.5px;
+    caret-color: rgb(136, 136, 136);
+    border: 0px none rgb(136, 136, 136);
+    font: 14px / 21px Muli, sans-serif;
+    margin: 0px 0px 16px;
+    outline: rgb(136, 136, 136) none 0px;
+}
+
+.widget {
+    background: #fff;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+    padding: 25px 30px 30px;
+    margin-bottom: 30px;
+    border-radius: 2px;
+}
+
+.widget-header {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dedede;
+}
+
+label {
+    font-size: 14px;
+    letter-spacing: 0;
+    color: #848484;
+}
+
+.form-control {
+    border-radius: 2px;
+    height: 50px;
+    background-color: transparent;
+    color: #666;
+    box-shadow: none;
+    font-size: 15px;
+}
+
+.widget .form-group i {
+    color: white;
+    background: #5672f9;
+    font-size: 25px;
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    margin-right: 15px;
+    border-radius: 100%;
+}
+
+.btn-main {
+    background: #5672f9;
+    color: #fff;
+    height: 50px;
+    width: 204.016px;
+} 

@@ -109,3 +109,9 @@ a {
     color: #fff;
     height: 50px;
 } 
+
+.btn-transparent {
+    background: transparent;
+    color: #5672f9;
+    border: 1px solid #5672f9;
+}

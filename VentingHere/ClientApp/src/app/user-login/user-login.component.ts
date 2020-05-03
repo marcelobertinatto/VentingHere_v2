@@ -63,7 +63,6 @@ export class UserLoginComponent implements OnInit {
         sessionStorage.setItem('user-authenticated', JSON.stringify(data['user']));
         sessionStorage.setItem('token', JSON.stringify(data['token']));
         if (this.returnUrl == null) {
-          // this.router.navigate(['/userspage']);
           this.router.navigate(['/home']);
         }
         this.router.navigate([this.returnUrl]);
