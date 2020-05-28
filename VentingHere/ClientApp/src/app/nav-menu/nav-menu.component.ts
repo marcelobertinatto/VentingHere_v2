@@ -1,8 +1,10 @@
+import { AuthService } from './../services/auth/AuthService';
 import { UserRegisterComponent } from './../user-register/user-register.component';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, HostListener } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { UserLoginComponent } from '../user-login/user-login.component';
 import { ModalService } from '../services/Modal.service';
+import { Router } from '@angular/router';
 
 const ngbModalOptions: NgbModalOptions = {
   backdrop: 'static',
@@ -28,7 +30,7 @@ export class NavMenuComponent implements OnInit, AfterViewInit {
   sticky = false;
   menuPosition: any;
 
-  constructor(private modalService: ModalService) { }
+  constructor(private modalService: ModalService, private authService: AuthService, private router: Router) { }
   ngOnInit(): void {
   }
 
@@ -37,7 +39,7 @@ export class NavMenuComponent implements OnInit, AfterViewInit {
 }
 
 @HostListener('window:scroll', ['$event'])
-    handleScroll(){
+    handleScroll() {
         const windowScroll = window.pageYOffset;
         if (windowScroll >= this.menuPosition) {
             this.sticky = true;
@@ -70,5 +72,18 @@ export class NavMenuComponent implements OnInit, AfterViewInit {
     } else {
       return  `with: ${reason}`;
     }
+  }
+
+  public user_Authenticated() {
+    return this.authService.user_Authenticated();
+  }
+
+  get user() {
+    return this.authService.user;
+  }
+
+  public logout() {
+    this.authService.session_cleaner();
+    this.router.navigate(['/']);
   }
 }

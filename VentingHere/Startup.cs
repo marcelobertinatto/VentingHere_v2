@@ -166,6 +166,7 @@ namespace VentingHere
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

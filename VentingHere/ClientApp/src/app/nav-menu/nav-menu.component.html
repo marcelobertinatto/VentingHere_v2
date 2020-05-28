@@ -1,6 +1,6 @@
-<div class="container-fluid p-0" #stickyMenu [class.sticky] = "sticky">
+<div class="container-fluid p-0" #stickyMenu [class.sticky]="sticky">
 	<nav class="navbar navbar-icon-top navbar-expand-lg navbar-light bg-light navbar-fixed-top" role="navigation">
-		<div class="container" >
+		<div class="container">
 			<a class="navbar-brand" href="#">
 				<img src="https://technext.github.io/classimax/images/logo.png" alt="" id="IMG_8" />
 			</a>
@@ -50,12 +50,23 @@
 						</div>
 					</li>
 				</ul>
-				<ul class="navbar-nav">
+				<ul class="navbar-nav" *ngIf="!user_Authenticated()">
 					<li class="nav-item">
 						<button class="btn btn-outline-info" type="button" (click)="open()"><span><i class="fas fa-user"></i></span> Login</button>
 					</li>
 					<li class="nav-item">
 						<button class="btn btn-outline-success" type="button" (click)="register()"><span><i class="fas fa-user-plus"></i></span> Register</button>
+					</li>
+				</ul>
+				<ul class="navbar-nav ml-auto" *ngIf="user_Authenticated()">					
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" id="navbarDropdown" data-target=".navbar-collapse" data-toggle="navbarDropdown" aria-haspopup="true" aria-expanded="false">
+							<img src="https://technext.github.io/classimax/images/user/user-thumb.jpg" alt=""
+							class="rounded-circle img_navbar" /> {{user.name}} </a>
+						<div class="dropdown-menu dropdown-menu-right dropdown-cyan" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" [routerLink]="['/userspage']">My account</a>
+							<a class="dropdown-item" (click)="logout()">Log out</a>
+						</div>
 					</li>
 				</ul>
 			</div>

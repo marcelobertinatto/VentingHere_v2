@@ -15,6 +15,7 @@ using VentingHere.Application.Interface;
 using VentingHere.AutoMapper;
 using VentingHere.Domain.Entities;
 using VentingHere.ModelView;
+using Microsoft.AspNetCore.Http;
 
 namespace VentingHere.Controllers
 {
@@ -64,11 +65,22 @@ namespace VentingHere.Controllers
                         if (outcome.Succeeded)
                         {
                             var userToReturn = _mapper.Map<UserLoginDTO>(u);
-                            return Ok(new
+                            u.LastLogin = DateTime.Now;
+                            var update = await _userManager.UpdateAsync(u);
+                            if (update.Succeeded)
                             {
-                                token = GenerateJWToken(u).Result,
-                                user = u
-                            });
+                                return Ok(new
+                                {
+                                    token = GenerateJWToken(u).Result,
+                                    user = u,
+                                    Application.Enum.HandleMessageType.Error
+                                });
+                            }
+                            else
+                            {
+                                var result = _handleMessage.Add(Application.Enum.HandleMessageType.Error, "Problem to log in!");
+                                return Ok(result);
+                            }                            
                         }
                         else
                         {
@@ -111,6 +123,7 @@ namespace VentingHere.Controllers
                         var re1 = _handleMessage.Add(Application.Enum.HandleMessageType.Error, "User already exists!");
                         return Ok(re1);
                     }
+                    u.UserFirstRegister = DateTime.Now;
                     var result = await _userManager.CreateAsync(u, user.Password);
                     var userToReturn = _mapper.Map<UserDTO>(u);
 
@@ -148,6 +161,59 @@ namespace VentingHere.Controllers
 
         }
 
+        [HttpPost("saveuserdetails")]
+        public async Task<IActionResult> SaveUserDetails([FromBody]UserDetailsDTO user)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var u = await _userManager.Users.FirstOrDefaultAsync(x => x.Email.Equals(user.Email));
+                    if (u != null)
+                    {
+                        if(await _userManager.CheckPasswordAsync(u, user.CurrentPassword))
+                        {
+                            //u.City = user.City;
+                            //u.County = user.County;
+                            //u.Image = user.Image;
+                            //u.Password = user.Password;
+                            //u.Phone = user.Phone;  
+                            var updatedUserResult = await _userManager.UpdateAsync(u);
+                            if (updatedUserResult.Succeeded)
+                            {
+                                var result = _handleMessage.Add(Application.Enum.HandleMessageType.Success, "User updated successfully!");
+                                return Ok(result); 
+                            }
+                            else
+                            {
+                                var result = _handleMessage.Add(Application.Enum.HandleMessageType.Error, "Problem to update user!");
+                                return Ok(result);
+                            }
+                        }
+                        else
+                        {
+                            var result = _handleMessage.Add(Application.Enum.HandleMessageType.Error, "Current password does not match!");
+                            return Ok(result);
+                        }                                              
+                    }
+                    else
+                    {
+                        var result = _handleMessage.Add(Application.Enum.HandleMessageType.Error, "User was not find!");
+                        return Ok(result);
+                    }
+                }
+                else
+                {
+                    var result = _handleMessage.Add(Application.Enum.HandleMessageType.Error, "Problem to update user!");
+                    return Ok(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                var result = _handleMessage.Add(Application.Enum.HandleMessageType.InternalErrors, "Something went wrong: !" + ex.ToString());
+                return Ok(result);
+            }
+        }
 
         #region PRIVATE METHODS
         private async Task<string> GenerateJWToken(User user)

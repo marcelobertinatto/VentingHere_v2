@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VentingHere.Infra;
 
 namespace VentingHere.Infra.Migrations
 {
     [DbContext(typeof(VentingContext))]
-    partial class VentingContextModelSnapshot : ModelSnapshot
+    [Migration("20200517010903_lastLogin")]
+    partial class lastLogin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -268,8 +270,6 @@ namespace VentingHere.Infra.Migrations
                     b.Property<string>("Surname");
 
                     b.Property<bool>("TwoFactorEnabled");
-
-                    b.Property<DateTime>("UserFirstRegister");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256);

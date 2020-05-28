@@ -1,4 +1,6 @@
-﻿namespace VentingHere.ModelView
+﻿using System;
+
+namespace VentingHere.ModelView
 {
     public class UserDTO
     {
@@ -11,5 +13,7 @@
         public string City { get; set; }
         public string County { get; set; }
         public string Phone { get; set; }
+        public DateTime?LastLogin{ get; set; }
+        public DateTime UserFirstRegister { get; set; }
     }
 }

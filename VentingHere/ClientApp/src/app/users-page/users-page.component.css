@@ -1,9 +1,17 @@
 .customSection {
-    padding: 70px 0;    
+    padding: 100px 0;    
 }
 
 .bg-gray {
     background: #F5F5F5;
+}
+
+.bg-middarkgray {
+    background: #5e6163;
+}
+
+.bg-ice {
+    background: #e6e4e4;
 }
 
 .card_custom {

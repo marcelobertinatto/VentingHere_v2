@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 
 namespace VentingHere.Domain.Entities
@@ -14,6 +15,8 @@ namespace VentingHere.Domain.Entities
         public string City { get; set; }
         public string County { get; set; }
         public string Phone { get; set; }
+        public DateTime? LastLogin { get; set; }
+        public DateTime UserFirstRegister { get; set; }
         public virtual IEnumerable<Rate> ListRates { get; set; }
         public virtual IEnumerable<Vent> ListVents { get; set; }
         public virtual IEnumerable<Answer> ListReplies { get; set; }

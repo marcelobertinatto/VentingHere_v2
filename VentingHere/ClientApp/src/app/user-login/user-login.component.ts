@@ -59,11 +59,13 @@ export class UserLoginComponent implements OnInit {
 
     return this.authService.login(this.u)
     .subscribe(data => {
-      if (data != null && data['Error'] === '') {
+      const resultError = data['Error'];
+      if (data != null && resultError === undefined) {
         sessionStorage.setItem('user-authenticated', JSON.stringify(data['user']));
         sessionStorage.setItem('token', JSON.stringify(data['token']));
+        this.close();
         if (this.returnUrl == null) {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/userspage']);
         }
         this.router.navigate([this.returnUrl]);
       } else {
@@ -84,6 +86,5 @@ export class UserLoginComponent implements OnInit {
   close() {
     this.modal.close();
   }
-
 
 }
