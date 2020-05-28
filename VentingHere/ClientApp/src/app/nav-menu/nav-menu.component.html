@@ -1,80 +1,75 @@
-<section id="SECTION_2">
-	<div id="DIV_3">
-		<div id="DIV_4">
-			<div id="DIV_5">
-				<nav id="NAV_6">
-					<a href="#" id="A_7">
-						<img src="https://technext.github.io/classimax/images/logo.png" alt="" id="IMG_8" />
-					</a>
-					<button type="button" id="BUTTON_9">w3
-						<span id="SPAN_10"></span>
-					</button>
-					<div id="DIV_11">
-						<ul class="nav nav-tabs" id="UL_12">
-							<li id="LI_13">
-								<a href="#" id="A_14">Home</a>
-							</li>
-							<li id="LI_15">
-								<a href="#" id="A_16">Dashboard</a>
-							</li>
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-									aria-haspopup="true" aria-expanded="false" href="#" data-toggle="dropdown"
-									aria-haspopup="true" aria-expanded="false" id="A_18">Pages<span><i
-											class="fa fa-angle-down"></i></span></a>
-								<!-- Dropdown list -->
-								<div class="dropdown-menu">
-									<a href="#" class="dropdown-item">Category</a>
-									<a href="#" class="dropdown-item">Single Page</a>
-									<a href="#" class="dropdown-item">Store Single</a>
-									<a href="#" class="dropdown-item">Dashboard</a>
-									<a href="#" class="dropdown-item">User Profile</a>
-									<a href="#" class="dropdown-item">Submit Coupon</a>
-									<a href="#" class="dropdown-item">Blog</a>
-									<a href="#" class="dropdown-item">Single Post</a>
-								</div>
-							</li>
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-									aria-haspopup="true" aria-expanded="false" href="#" data-toggle="dropdown"
-									aria-haspopup="true" aria-expanded="false" id="A_31">Listing<span><i
-											class="fa fa-angle-down"></i></span></a>
-								<!-- Dropdown list -->
-								<div class="dropdown-menu">
-									<a href="#" class="dropdown-item">Action</a>
-									<a href="#" class="dropdown-item">Another
-										action</a>
-									<a href="#" class="dropdown-item">Something else
-										here</a>
-								</div>
-							</li>
-						</ul>
-						<ul id="UL_38">
-							<li id="LI_39">
-								<a href="#" id="A_40" (click)="open(mymodal)">Login</a>
-							</li>
-							<li id="LI_41">
-								<a href="#" id="A_42">Add Listing</a>
-							</li>
-						</ul>
-					</div>
-				</nav>
+<div class="container-fluid p-0" #stickyMenu [class.sticky]="sticky">
+	<nav class="navbar navbar-icon-top navbar-expand-lg navbar-light bg-light navbar-fixed-top" role="navigation">
+		<div class="container">
+			<a class="navbar-brand" href="#">
+				<img src="https://technext.github.io/classimax/images/logo.png" alt="" id="IMG_8" />
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="navbar-collapse collapse w-100 justify-content-center" id="navbarSupportedContent">
+				<ul class="navbar-nav mx-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="#">
+							Home
+							<span class="sr-only">(current)</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">
+							Dashboard
+						</a>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Pages <span><i class="fa fa-angle-down"></i></span>
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a href="#" class="dropdown-item">Category</a>
+							<a href="#" class="dropdown-item">Single Page</a>
+							<a href="#" class="dropdown-item">Store Single</a>
+							<a href="#" class="dropdown-item">Dashboard</a>
+							<a href="#" class="dropdown-item">User Profile</a>
+							<a href="#" class="dropdown-item">Submit Coupon</a>
+							<a href="#" class="dropdown-item">Blog</a>
+							<a href="#" class="dropdown-item">Single Post</a>
+						</div>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Listing <span><i class="fa fa-angle-down"></i></span>
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#">Action</a>
+							<a class="dropdown-item" href="#">Another action</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#">Something else here</a>
+						</div>
+					</li>
+				</ul>
+				<ul class="navbar-nav" *ngIf="!user_Authenticated()">
+					<li class="nav-item">
+						<button class="btn btn-outline-info" type="button" (click)="open()"><span><i class="fas fa-user"></i></span> Login</button>
+					</li>
+					<li class="nav-item">
+						<button class="btn btn-outline-success" type="button" (click)="register()"><span><i class="fas fa-user-plus"></i></span> Register</button>
+					</li>
+				</ul>
+				<ul class="navbar-nav ml-auto" *ngIf="user_Authenticated()">					
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" id="navbarDropdown" data-target=".navbar-collapse" data-toggle="navbarDropdown" aria-haspopup="true" aria-expanded="false">
+							<img src="https://technext.github.io/classimax/images/user/user-thumb.jpg" alt=""
+							class="rounded-circle img_navbar" /> {{user.name}} </a>
+						<div class="dropdown-menu dropdown-menu-right dropdown-cyan" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" [routerLink]="['/userspage']">My account</a>
+							<a class="dropdown-item" (click)="logout()">Log out</a>
+						</div>
+					</li>
+				</ul>
 			</div>
 		</div>
-	</div>
-</section>
-
-<ng-template #mymodal let-modal>
-	<div class="modal-header">
-		<h4 class="modal-title" id="modal-basic-title">Bootstrap Modal</h4>
-		<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-			<span aria-hidden="true">×</span>
-		</button>
-	</div>
-	<div class="modal-body">
-		This is example from ItSolutionStuff.com
-	</div>
-	<div class="modal-footer">
-		<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
-	</div>
-</ng-template>
+	</nav>
+</div>

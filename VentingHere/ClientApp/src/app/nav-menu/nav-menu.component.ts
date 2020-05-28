@@ -1,18 +1,52 @@
-import { Component } from '@angular/core';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from './../services/auth/AuthService';
+import { UserRegisterComponent } from './../user-register/user-register.component';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, HostListener } from '@angular/core';
+import { NgbModal, ModalDismissReasons, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { UserLoginComponent } from '../user-login/user-login.component';
+import { ModalService } from '../services/Modal.service';
+import { Router } from '@angular/router';
+
+const ngbModalOptions: NgbModalOptions = {
+  backdrop: 'static',
+  keyboard : false,
+  size: 'lg',
+  scrollable: true,
+  windowClass: 'my-class'
+};
 
 @Component({
   selector: 'app-nav-menu',
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.css']
 })
-export class NavMenuComponent {
+export class NavMenuComponent implements OnInit, AfterViewInit {
+  @ViewChild(UserLoginComponent) userLoginComponent: UserLoginComponent;
+  @ViewChild(UserRegisterComponent) userRegisterComponent: UserRegisterComponent;
+  @ViewChild('stickyMenu') menuElement: ElementRef;
+
   isExpanded = false;
   title = 'appBootstrap';
-  
   closeResult: string;
+  sticky = false;
+  menuPosition: any;
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: ModalService, private authService: AuthService, private router: Router) { }
+  ngOnInit(): void {
+  }
+
+  ngAfterViewInit() {
+    this.menuPosition = this.menuElement.nativeElement.offsetTop;
+}
+
+@HostListener('window:scroll', ['$event'])
+    handleScroll() {
+        const windowScroll = window.pageYOffset;
+        if (windowScroll >= this.menuPosition) {
+            this.sticky = true;
+        } else {
+            this.sticky = false;
+        }
+    }
 
   collapse() {
     this.isExpanded = false;
@@ -22,12 +56,12 @@ export class NavMenuComponent {
     this.isExpanded = !this.isExpanded;
   }
 
-  open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+  open() {
+    this.modalService.open(UserLoginComponent, ngbModalOptions);
+  }
+
+  register() {
+    this.modalService.register(UserRegisterComponent, ngbModalOptions);
   }
 
   private getDismissReason(reason: any): string {
@@ -38,5 +72,18 @@ export class NavMenuComponent {
     } else {
       return  `with: ${reason}`;
     }
+  }
+
+  public user_Authenticated() {
+    return this.authService.user_Authenticated();
+  }
+
+  get user() {
+    return this.authService.user;
+  }
+
+  public logout() {
+    this.authService.session_cleaner();
+    this.router.navigate(['/']);
   }
 }

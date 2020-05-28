@@ -1,14 +1,108 @@
-
+<!-- <ng-template #loginTemplate let-modal>    
+</ng-template>
+<ng-container>
     <div class="modal-header">
-        <h4 class="modal-title">Hi there!</h4>
-        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-            <span aria-hidden="true">&times;</span>
+        <h4 class="modal-title" id="modal-basic-title">Bootstrap Modal</h4>
+        <button type="button" class="close" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">×</span>
         </button>
     </div>
     <div class="modal-body">
-        <p>Hello, {{name}}!</p>
+        This is example from ItSolutionStuff.com
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+        <button type="button" class="btn btn-outline-dark" (click)="close()">Ok</button>
     </div>
+</ng-container> -->
 
+<ng-template #loginTemplate let-modal>
+</ng-template>
+<ng-container>
+    <div class="modal-header pt-2 pb-2">
+        <h3 id="H3_1436">
+            Sign In <span id="SPAN_1437">City<strong id="STRONG_1438">Book</strong></span>
+        </h3>
+        <div id="DIV_1434">
+            <i id="I_1435"><button type="button" class="close" aria-label="Close" (click)="close()"></button></i>
+        </div>
+    </div>
+    <div class="modal-body">
+        <div id="DIV_1439">
+            <p id="P_1440">
+                For faster login or register use your social account.
+            </p> <a href="http://citybook.kwst.net/index.html#" id="A_1441"><i id="I_1442"></i>Log in with
+                Facebook</a> <a href="http://citybook.kwst.net/index.html#" id="A_1443"><i id="I_1444"></i> Log in
+                with Twitter</a>
+        </div>
+        <div id="DIV_1445">
+            <span id="SPAN_1446">or</span>
+        </div>
+        <div id="DIV_1447">
+            <ul id="UL_1448">
+                <li id="LI_1449">
+                    <a href="" id="A_1450"><i class="fa fa-user"></i> Login</a>
+                </li>
+            </ul>
+            <div id="DIV_1453">
+                <div id="DIV_1454">
+                    <div id="DIV_1455">
+                        <form [formGroup]="loginForm" id="FORM_1456">
+                            <label id="LABEL_1457">
+                                Username or Email Address *
+                            </label>
+                            <input formControlName="userEmail" class="form-control" type="text" id="userEmail" [ngClass]="{'is-invalid': loginForm.get('userEmail').errors,
+                            'is-valid':loginForm.get('userEmail').valid}" />
+                            <div *ngIf="loginForm.get('userEmail').hasError('required') && loginForm.get('userEmail').touched"
+                                class="invalid-feedback mt-2">
+                                Email is MANDATORY!
+                            </div>
+                            <div class="invalid-feedback mt-2"
+                                *ngIf="loginForm.get('userEmail').hasError('email')">       
+                                Enter a valid email address!
+                            </div>
+                            <label id="LABEL_1459">
+                                Password *
+                            </label>
+                            <input formControlName="userPassword" class="form-control" type="password" id="userPassword"
+                                [ngClass]="{'is-invalid': loginForm.get('userPassword').errors,
+                            'is-valid':loginForm.get('userPassword').valid}" />
+                            <div *ngIf="loginForm.get('userPassword').hasError('required') 
+                                  && loginForm.get('userPassword').touched" class="invalid-feedback mt-2">
+                                Password is MANDATORY!
+                            </div>
+                            <div class="invalid-feedback mt-2"
+                                *ngIf="loginForm.get('userPassword').hasError('hasNumber')">      
+                                The password must contain at least one number!
+                            </div>
+                            <div class="invalid-feedback mt-2"
+                                *ngIf="loginForm.get('userPassword').hasError('hasLetter')">      
+                                The password must contain at least one letter!
+                            </div>
+                            <div class="invalid-feedback mt-2"
+                                *ngIf="loginForm.get('userPassword').hasError('minlenght')">      
+                                The password must contain at least 6 characters!
+                            </div>
+                            <button type="submit" (click)="submit()" id="BUTTON_1461">
+                                <span id="SPAN_1462">Log In</span>
+                            </button>
+                            <div id="DIV_1463">
+                            </div>
+                            <div id="DIV_1464">
+                                <label for="check-a" id="LABEL_1466">
+                                    Remember me
+                                </label>
+                                <input formControlName="rememberMe" id="INPUT_1465" id="rememberMe" type="checkbox" name="check" />                               
+                            </div>
+                        </form>
+                        <div id="DIV_1467">
+                            <a href="http://citybook.kwst.net/index.html#" id="A_1468">Lost Your Password?</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="close()">Close</button>
+    </div>
+</ng-container>

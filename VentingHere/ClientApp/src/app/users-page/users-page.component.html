@@ -1,0 +1,117 @@
+<section class="customSection bg-ice">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+        <div class="card mb-3 card_custom">
+          <!-- <img src="https://technext.github.io/classimax/images/user/user-thumb.jpg" alt=""
+            class="rounded-circle mx-auto d-block mt-2 img_51" /> -->
+            <img src="" class="rounded-circle mx-auto d-block mt-2 img_51">
+          <div class="card-body">
+            <h5 class="card-title h5_custom">Samanta Doe</h5>
+            <p class="card-text p_custom">Joined {{user.userFirstRegister | date}}</p>
+            <p class="card-text p_custom">Last Login {{user.lastLogin | date: "dd-MM-yyyy HH:mm:ss"}}</p>
+          </div>
+        </div>
+
+        <div class="card card_custom mb-3">
+          <div class="card-body">
+            <ul class="list-inline ml-3">
+              <li class="list-inline-item mb-2">
+                <i class="fas fa-user fa-2x"></i>
+              </li>
+              <li class="list-inline-item mb-2 align-middle">
+                My Ads
+              </li>
+            </ul>
+            <ul class="list-inline ml-3">
+              <li class="list-inline-item mb-2">
+                <i class="far fa-bookmark fa-2x"></i>
+              </li>
+              <li class="list-inline-item mb-2 align-middle">
+                Favourite Ads
+              </li>
+            </ul>
+            <ul class="list-inline ml-3">
+              <li class="list-inline-item mb-2">
+                <i class="far fa-file-archive fa-2x"></i>
+              </li>
+              <li class="list-inline-item mb-2 align-middle">
+                Archieved Ads
+              </li>
+            </ul>
+            <ul class="list-inline ml-3">
+              <li class="list-inline-item mb-2">
+                <i class="far fa-thumbs-up fa-2x"></i>
+              </li>
+              <li class="list-inline-item mb-2 align-middle">
+                Pending Approval
+              </li>
+            </ul>
+            <ul class="list-inline ml-3">
+              <a href="" (click)="logout()">
+              <li class="list-inline-item mb-2">
+                <i class="fas fa-power-off fa-2x"></i>
+              </li>
+              <li class="list-inline-item mb-2 align-middle">
+                Logout
+              </li>
+            </a>
+            </ul>
+            <ul class="list-inline ml-3">
+              <li class="list-inline-item mb-2">
+                <i class="far fa-trash-alt fa-2x"></i>
+              </li>
+              <li class="list-inline-item mb-2 align-middle">
+                Delete Account
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
+        <form [formGroup]="frmSaveUserDetails">
+          <div class="widget">
+            <h3 class="widget-header">Edit Personal Information</h3>
+            <div class="form-group">
+              <label for="username">User Name</label>
+              <input type="text" class="form-control" formControlName="username">
+            </div>
+            <div class="form-group">
+              <label for="fullname">Full Name</label>
+              <input type="text" class="form-control" formControlName="fullname">
+            </div>
+            <div class="form-group choose-file">
+              <ul class="list-inline">
+                <li class="list-inline-item mb-2">
+                  <i class="fa fa-user text-center"></i>
+                  <label *ngIf="fileUploadProgress">Upload File Progress: {{ fileUploadProgress }}</label>
+                </li>
+                <li class="list-inline-item mb-2">
+                  <input type="file" class="form-control-file d-inline" (change)="onFileChange($event)" formControlName="imageFile" id="input-file">
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="widget">
+            <h3 class="widget-header">Edit Password</h3>
+            <div class="form-group">
+              <label for="current-password">Current Password</label>
+              <input type="password" class="form-control" formControlName="currentpassword">
+            </div>
+            <div class="form-group">
+              <label for="new-password">New Password</label>
+              <input type="password" class="form-control" formControlName="newpassword">
+            </div>
+            <div class="form-group">
+              <label for="confirm-new-password">Confirm New Password</label>
+              <input type="password" class="form-control" formControlName="confirmnewpassword">
+            </div>
+          </div>
+        </form>
+        <div class="block d-flex">
+          <button class="btn btn-main btn-block" (click)="saveUserDetails()">SAVE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
