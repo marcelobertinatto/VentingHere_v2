@@ -1,3 +1,4 @@
+import { ComponentFixture } from '@angular/core/testing';
 import { Userdetailsdto } from './../models/userdetailsdto';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
@@ -47,36 +48,46 @@ export class UsersPageComponent implements OnInit {
   }
 
   public saveUserDetails() {
-    const form = this.frmSaveUserDetails.value;
-    this.u = this.frmSaveUserDetails.value;
+    this.u.fullname = this.frmSaveUserDetails.get('fullname').value;
+    this.u.currentpassword = this.frmSaveUserDetails.get('currentpassword').value;
+    this.u.newpassword = this.frmSaveUserDetails.get('newpassword').value;
+    this.u.confirmnewpassword = this.frmSaveUserDetails.get('confirmnewpassword').value;
+    this.u.username = this.frmSaveUserDetails.get('username').value;
     this.u.email = this.user.email;
 
     this.userService.saveUserDetails(this.u)
     .subscribe(
       data => {
-        if (data['Success'] != null) {
+        const d = Object.keys(data);
+        const msgId = data[d[0]];
+        const msg = data[d[1]];
+        const returnedU = data[d[2]] as Userdetailsdto;
+        if (returnedU != null && msgId === 2) {
+          this.user.image = returnedU.userimage;
+          this.user.name = returnedU.fullname;
+          sessionStorage.setItem('user-authenticated', JSON.stringify(this.user));
           Swal.fire({
             position: 'top-end',
             title: 'Nicee...',
-            text: data['Success'],
+            text: msg,
             icon: 'success',
             timer: 3500
           }).then(() => {
-            this.router.navigate(['/']);
+            this.router.navigate(['/userspage']);
           });
         } else {
           if (data['Error'] != null) {
             Swal.fire({
               position: 'top-end',
               icon: 'error',
-              text: data['Error'],
+              text: msg,
               timer: 3500
             });
           } else {
             Swal.fire({
               position: 'top-end',
               icon: 'error',
-              text: data['InternalErrors'],
+              text: msg,
               timer: 3500
             });
           }

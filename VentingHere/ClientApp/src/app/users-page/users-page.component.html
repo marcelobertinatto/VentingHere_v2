@@ -5,11 +5,11 @@
         <div class="card mb-3 card_custom">
           <!-- <img src="https://technext.github.io/classimax/images/user/user-thumb.jpg" alt=""
             class="rounded-circle mx-auto d-block mt-2 img_51" /> -->
-            <img src="" class="rounded-circle mx-auto d-block mt-2 img_51">
+            <img src="{{'data:image/jpg;base64,' + user.image}}" class="rounded-circle mx-auto d-block mt-2 img_51">
           <div class="card-body">
-            <h5 class="card-title h5_custom">Samanta Doe</h5>
+            <h5 class="card-title h5_custom">{{user.name}}</h5>
             <p class="card-text p_custom">Joined {{user.userFirstRegister | date}}</p>
-            <p class="card-text p_custom">Last Login {{user.lastLogin | date: "dd-MM-yyyy HH:mm:ss"}}</p>
+            <!-- <p class="card-text p_custom">Last Login {{user.lastLogin | date: "dd-MM-yyyy HH:mm:ss"}}</p> -->
           </div>
         </div>
 
@@ -17,18 +17,18 @@
           <div class="card-body">
             <ul class="list-inline ml-3">
               <li class="list-inline-item mb-2">
-                <i class="fas fa-user fa-2x"></i>
+                <i class="fas fa-angry fa-2x"></i>
               </li>
               <li class="list-inline-item mb-2 align-middle">
-                My Ads
+                My Complaints
               </li>
             </ul>
-            <ul class="list-inline ml-3">
+            <!-- <ul class="list-inline ml-3">
               <li class="list-inline-item mb-2">
                 <i class="far fa-bookmark fa-2x"></i>
               </li>
               <li class="list-inline-item mb-2 align-middle">
-                Favourite Ads
+                Favourite Complaints
               </li>
             </ul>
             <ul class="list-inline ml-3">
@@ -36,7 +36,7 @@
                 <i class="far fa-file-archive fa-2x"></i>
               </li>
               <li class="list-inline-item mb-2 align-middle">
-                Archieved Ads
+                Archieved Complaints
               </li>
             </ul>
             <ul class="list-inline ml-3">
@@ -46,7 +46,7 @@
               <li class="list-inline-item mb-2 align-middle">
                 Pending Approval
               </li>
-            </ul>
+            </ul> -->
             <ul class="list-inline ml-3">
               <a href="" (click)="logout()">
               <li class="list-inline-item mb-2">
@@ -74,7 +74,7 @@
             <h3 class="widget-header">Edit Personal Information</h3>
             <div class="form-group">
               <label for="username">User Name</label>
-              <input type="text" class="form-control" formControlName="username">
+              <input type="text" class="form-control" formControlName="username" readonly />
             </div>
             <div class="form-group">
               <label for="fullname">Full Name</label>

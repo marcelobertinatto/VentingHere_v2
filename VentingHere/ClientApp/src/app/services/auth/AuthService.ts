@@ -27,7 +27,6 @@ export class AuthService {
         const user_json = sessionStorage.getItem('user-authenticated');
         const u = JWTHelper.decodedToken(sessionStorage.getItem('token'));
         this._user = JSON.parse(user_json);
-        this._user.image = 'data:image/png;base64,' + this._user.image;
         if (u != null) {
           this._user.id = u.nameid;
         }

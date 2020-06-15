@@ -1,0 +1,22 @@
+.customSection {
+    padding: 100px 0;    
+}
+
+.bg-ice {
+    background: #e6e4e4;
+}
+
+.widget {
+    background: #fff;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+    padding: 25px 30px 30px;
+    margin-bottom: 30px;
+    border-radius: 2px;
+}
+
+.btn-main {
+    background: #5672f9;
+    color: #fff;
+    height: 50px;
+    width: 204.016px;
+} 

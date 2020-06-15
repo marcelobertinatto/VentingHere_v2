@@ -47,6 +47,7 @@ namespace VentingHere.Infra.Repository
         public void Update(TEntity entity)
         {
             _ventingContext.Entry(entity).State = EntityState.Detached;
+            //_ventingContext.Entry(entity).State = EntityState.Modified;
             _ventingContext.Set<TEntity>().Update(entity);
             _ventingContext.SaveChanges();
         }

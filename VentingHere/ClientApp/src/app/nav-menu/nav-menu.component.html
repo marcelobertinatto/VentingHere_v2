@@ -49,6 +49,9 @@
 							<a class="dropdown-item" href="#">Something else here</a>
 						</div>
 					</li>
+					<li class="nav-item">
+						<button class="btn btn-danger"><i class="fas fa-exclamation-triangle"></i> Make a Complaint</button>
+					</li>
 				</ul>
 				<ul class="navbar-nav" *ngIf="!user_Authenticated()">
 					<li class="nav-item">
@@ -61,7 +64,9 @@
 				<ul class="navbar-nav ml-auto" *ngIf="user_Authenticated()">					
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" id="navbarDropdown" data-target=".navbar-collapse" data-toggle="navbarDropdown" aria-haspopup="true" aria-expanded="false">
-							<img src="https://technext.github.io/classimax/images/user/user-thumb.jpg" alt=""
+							<!-- <img src="https://technext.github.io/classimax/images/user/user-thumb.jpg" alt=""
+							class="rounded-circle img_navbar" /> {{user.name}} </a> -->
+							<img src="{{'data:image/jpg;base64,' + user.image}}" alt=""
 							class="rounded-circle img_navbar" /> {{user.name}} </a>
 						<div class="dropdown-menu dropdown-menu-right dropdown-cyan" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" [routerLink]="['/userspage']">My account</a>

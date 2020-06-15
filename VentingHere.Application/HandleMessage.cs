@@ -1,16 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using VentingHere.Application.Enum;
 using VentingHere.Application.Interface;
 
 namespace VentingHere.Application
 {
-    public class HandleMessage : IHandleMessage
+    public class HandleMessage<TEntity> : IHandleMessage<TEntity> where TEntity : class
     {
-        public Dictionary<HandleMessageType, string> Add(HandleMessageType messageType, string message)
+        public Tuple<HandleMessageType, string, TEntity> Add(HandleMessageType messageType, string message, TEntity entity)
         {
-            var result = new Dictionary<HandleMessageType, string>();
-
-            result.Add(messageType, message);
+            var result = Tuple.Create(messageType, message, entity);
+            //new Tuple<HandleMessageType, string, TEntity>(messageType, message,entity);
 
             return result;
         }
