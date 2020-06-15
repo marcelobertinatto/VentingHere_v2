@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using System.Collections.Generic;
 using System.Text;
 using VentingHere.Application;
 using VentingHere.Application.Interface;
@@ -21,6 +22,7 @@ using VentingHere.Domain.Repository.Interfaces;
 using VentingHere.Domain.Repository.Services;
 using VentingHere.Infra;
 using VentingHere.Infra.Repository;
+using VentingHere.ModelView;
 
 namespace VentingHere
 {
@@ -126,8 +128,9 @@ namespace VentingHere
             services.AddScoped<IServiceAppContact, ServiceAppContact>();
             #endregion
 
-            #region HANDLE MESSAGE
-            services.AddScoped<IHandleMessage, HandleMessage>();
+            #region HANDLE MESSAGE USER
+            services.AddScoped<IHandleMessage<UserDetailsDTO>, HandleMessage<UserDetailsDTO>>();
+            services.AddScoped<IHandleMessage<List<string>>, HandleMessage<List<string>>>();
             #endregion
 
             #region ROLE

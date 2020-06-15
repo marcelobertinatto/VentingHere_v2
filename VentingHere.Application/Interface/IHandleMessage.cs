@@ -5,8 +5,8 @@ using VentingHere.Application.Enum;
 
 namespace VentingHere.Application.Interface
 {
-    public interface IHandleMessage
+    public interface IHandleMessage<TEntity> where TEntity : class
     {
-        Dictionary<HandleMessageType, string> Add(HandleMessageType messageType, string message);
+        Tuple<HandleMessageType, string, TEntity> Add(HandleMessageType messageType, string message, TEntity entity);
     }
 }

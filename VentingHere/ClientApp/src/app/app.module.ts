@@ -15,6 +15,7 @@ import { UserRegisterComponent } from './user-register/user-register.component';
 import { Authinterceptor } from './services/auth/Authinterceptor';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { UsersPageComponent } from './users-page/users-page.component';
+import { UserComplaintComponent } from './user-complaint/user-complaint.component';
 
 @NgModule({
    declarations: [
@@ -25,7 +26,8 @@ import { UsersPageComponent } from './users-page/users-page.component';
       FooterComponent,
       UserLoginComponent,
       UserRegisterComponent,
-      UsersPageComponent
+      UsersPageComponent,
+      UserComplaintComponent
    ],
    imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -34,7 +36,8 @@ import { UsersPageComponent } from './users-page/users-page.component';
     RouterModule.forRoot([
       { path: '', component: HomeBodyComponent, pathMatch: 'full' },
       { path: 'login', component: UserLoginComponent },
-      { path: 'userspage', component: UsersPageComponent }
+      { path: 'userspage', component: UsersPageComponent },
+      { path: 'usercomplaint', component: UserComplaintComponent }
     ]),
     NgbModule,
     NgbAlertModule,

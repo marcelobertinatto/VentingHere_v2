@@ -25,21 +25,23 @@ namespace VentingHere.Controllers
         #region INJECTED SERVICES
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IServiceAppUser _serviceAppUser;
         private readonly IMapper _mapper;
         private readonly IConfiguration _config;
-        private readonly IHandleMessage _handleMessage;
+        private readonly IHandleMessage<UserDetailsDTO> _handleMessageUser;
         #endregion
 
-        public UserController(UserManager<User> userManager, SignInManager<User> signInManager,
+        public UserController(IServiceAppUser serviceAppUser, UserManager<User> userManager, SignInManager<User> signInManager,
             IMapper mapper,
             IConfiguration config,
-            IHandleMessage handleMessage)
+            IHandleMessage<UserDetailsDTO> handleMessageUser)
         {
+            _serviceAppUser = serviceAppUser;
             _userManager = userManager;
             _signInManager = signInManager;
             _mapper = mapper;
             _config = config;
-            _handleMessage = handleMessage;
+            _handleMessageUser = handleMessageUser;
         }
 
         public IActionResult Index()
@@ -55,15 +57,15 @@ namespace VentingHere.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var u = await _userManager.Users.FirstOrDefaultAsync(x => x.Email.ToUpper().Equals(user.Email.ToUpper()));
+                    var u = await _userManager.Users.FirstOrDefaultAsync(x => x.Email.ToUpper().Equals(user.Email.ToUpper()) && x.Password.Equals(user.Password));
 
                     if (u != null)
                     {
-                        //verify if the password match the requirements.
-                        var outcome = await _signInManager.CheckPasswordSignInAsync(u, user.Password, false);
+                        ////verify if the password match the requirements.
+                        //var outcome = await _signInManager.CheckPasswordSignInAsync(u, user.Password, false);
 
-                        if (outcome.Succeeded)
-                        {
+                        //if (outcome.Succeeded)
+                        //{
                             var userToReturn = _mapper.Map<UserLoginDTO>(u);
                             u.LastLogin = DateTime.Now;
                             var update = await _userManager.UpdateAsync(u);
@@ -78,32 +80,32 @@ namespace VentingHere.Controllers
                             }
                             else
                             {
-                                var result = _handleMessage.Add(Application.Enum.HandleMessageType.Error, "Problem to log in!");
+                                var result = _handleMessageUser.Add(Application.Enum.HandleMessageType.Error, "Problem to log in!",null);
                                 return Ok(result);
                             }                            
-                        }
-                        else
-                        {
-                            var result = _handleMessage.Add(Application.Enum.HandleMessageType.Error, "User does not exist!");
-                            return Ok(result);
-                        }
+                        //}
+                        //else
+                        //{
+                        //    var result = _handleMessage.Add(Application.Enum.HandleMessageType.Error, "User does not exist!");
+                        //    return Ok(result);
+                        //}
                     }
                     else
                     {
-                        var result = _handleMessage.Add(Application.Enum.HandleMessageType.Error, "User does not exist!");
+                        var result = _handleMessageUser.Add(Application.Enum.HandleMessageType.Error, "User does not exist!",null);
                         return Ok(result);
                     }
                     
                 }
                 else
                 {
-                    var result = _handleMessage.Add(Application.Enum.HandleMessageType.Error, "Problem to log in!");
+                    var result = _handleMessageUser.Add(Application.Enum.HandleMessageType.Error, "Problem to log in!",null);
                     return Ok(result);
                 }
             }
             catch (Exception ex)
             {
-                var result = _handleMessage.Add(Application.Enum.HandleMessageType.InternalErrors, "Something went wrong: !" + ex.ToString());
+                var result = _handleMessageUser.Add(Application.Enum.HandleMessageType.InternalErrors, "Something went wrong: !" + ex.ToString(),null);
                 return Ok(result);
             }
         }
@@ -120,17 +122,21 @@ namespace VentingHere.Controllers
                     var us = await _userManager.Users.FirstOrDefaultAsync(x => x.Email.ToUpper().Equals(user.Email.ToUpper()));
                     if (us != null)
                     {
-                        var re1 = _handleMessage.Add(Application.Enum.HandleMessageType.Error, "User already exists!");
+                        var re1 = _handleMessageUser.Add(Application.Enum.HandleMessageType.Error, "User already exists!",null);
                         return Ok(re1);
                     }
                     u.UserFirstRegister = DateTime.Now;
+                    if (string.IsNullOrEmpty(u.Image))
+                    {
+                        u.Image = "R0lGODlhGAEYAZEAAP///+Xl5ZmZmQAAACwAAAAAGAEYAQAC/4yPqcvtD6OctNqLs968+w+G4kiW5omm6sq27gvH8kzX9o3n+s73/g8MCofEovGITCqXzKbzCY1Kp9Sq9YrNarfcrvcLVgrG4bJxjE6r1+y1+b1ry+dzuD1Gz+vV975pDxjo5kfIIXiIKFC4OJHo+KjIKBkAWVk5SWip6Yh5t/mZ2PkGSnooGlaaCnjKpeoayGr1OgsbO0WLq2crldtbtwvlKzwI3DR8jFZsjMysLMYM7fwDTc0m7VOdnXbNo+0dyW3zPQ4eLkP+bQ6Dzq7Owg5f7k4SXz//Vx9/P5Jvvx/Sz9+/DgHzDTRUUOBBDAkVLrTQUN9DhhHhTbxQ0eJFCv8ZNW6U0NHjxwch242EUBLdSZQpx61s0NLkywQxVc5EUNPmTQM5dd7sSW4nT6AudxItOvNo0J9KvRlt6jQpVG1Mp0Z7arVZ1azIsHLtKvUr2JViqb0sa3Yk2rQb17Kd6LZa27hX4dLVavfusbl6h13sO3Yh4L15B/cqbDgX4sS0/jJWvPixKseSZ/GtPJky5lSXN5Pq7PnTx9CfR5MWffK0JrKqL6VuDYk1bE6vZ4eSbVvQ2dy6w/LO4/X3L9/C5QQvbm0rcmLEl2877pyM0OjMmzsXOpS69Onat3PXjj179PDir5PvTp4S9fTqx6cHfx4+dPPK5Vt3X3/9fPy7uyf/y68fgPTdtxx2/nlHIHIG+hfegQ0yuCB6EdonYHEPSvhdgBMOmCGH+/32HoUf8haihh0WWKKHI9rGnogngsheewrGKKNwNNZI4o04sqjjjD3CqOOOrQV5AJBE5khkkbMlucCQTCqg2pNQkiZlk55VaWVlWDKA2ZZcaunllI+FmSVjZJZp2JlipqkmTWa26SabcCo52JxxAmYnTnXmqWdffPap15903iXooHQVWp5biCa61qJCiuUoo5BGemikj2Zl6aVWZVoppXFx+qmlnTo66qKlInpqoakKuuqfrfL5ap6x2jnrnLXCeWubuaq565m9kvlrmMF6GaqoioLaKLJo6WWqKVTMFutpsqQSqqqctI5pa5e8hiZslFjyyCSSP9p4o4orLhmfi7ipq9aB8tTmYH/uvhuZu6DN+9w/+K7izr63SeOvJbsEDMopBGdWyMGN+aHwYaM0LAwqEAemxcRvyWJxNlVk7NMyHHeMxMf9hCxyQkSU3NDJKBek8sojD+FyQC3HLJEQNBsE8801B6HzzkD0LNLPQIOMzdBL2Ww0UjwnnU7OTFPl9NNyRS11XUtXffE0WGdd9NZ4Xe01YUiHLTbYZPsy89kOj6322ma3vTDbcMf99tyupG333VTnjXDdfJcm99+lkFAAADs=";
+                    }
                     var result = await _userManager.CreateAsync(u, user.Password);
-                    var userToReturn = _mapper.Map<UserDTO>(u);
+                    //var userToReturn = _mapper.Map<UserDTO>(u);
 
                     if (result.Succeeded)
                     {
                         //return Created("registeruser", userToReturn);
-                        var re = _handleMessage.Add(Application.Enum.HandleMessageType.Success, "User was added successfully!");
+                        var re = _handleMessageUser.Add(Application.Enum.HandleMessageType.Success, "User was added successfully!",null);
                         return Ok(re);
                     }
                     else
@@ -143,19 +149,19 @@ namespace VentingHere.Controllers
                                 errors = errors + err.Description + "\n";
                             } 
                         }
-                        var re1 = _handleMessage.Add(Application.Enum.HandleMessageType.Error, string.IsNullOrEmpty(errors) ? "Something went wron!" : errors);
+                        var re1 = _handleMessageUser.Add(Application.Enum.HandleMessageType.Error, string.IsNullOrEmpty(errors) ? "Something went wron!" : errors,null);
                         return Ok(re1);
                     }
                 }
                 else
                 {
-                    var result = _handleMessage.Add(Application.Enum.HandleMessageType.Error, "User model is not valid!");
+                    var result = _handleMessageUser.Add(Application.Enum.HandleMessageType.Error, "User model is not valid!",null);
                     return Ok(result);
                 }
             }
             catch (System.Exception ex)
             {
-                var result = _handleMessage.Add(Application.Enum.HandleMessageType.InternalErrors, "Something went wrong !");
+                var result = _handleMessageUser.Add(Application.Enum.HandleMessageType.InternalErrors, "Something went wrong !",null);
                 return Ok(result);
             }
 
@@ -171,46 +177,53 @@ namespace VentingHere.Controllers
                     var u = await _userManager.Users.FirstOrDefaultAsync(x => x.Email.Equals(user.Email));
                     if (u != null)
                     {
-                        if(await _userManager.CheckPasswordAsync(u, user.CurrentPassword))
+                        var userChecked = await _userManager.Users.FirstOrDefaultAsync(x => x.Email.ToUpper().Equals(user.Email.ToUpper()) && x.Password.Equals(user.CurrentPassword));
+                        if (userChecked != null)
                         {
-                            //u.City = user.City;
-                            //u.County = user.County;
-                            //u.Image = user.Image;
-                            //u.Password = user.Password;
-                            //u.Phone = user.Phone;  
-                            var updatedUserResult = await _userManager.UpdateAsync(u);
-                            if (updatedUserResult.Succeeded)
+                            if (user.Userimage != null)
                             {
-                                var result = _handleMessage.Add(Application.Enum.HandleMessageType.Success, "User updated successfully!");
+                                u.Image = user.Userimage; 
+                            }
+                            u.Password = user.NewPassword;
+                            u.Name = user.Fullname;
+                            _serviceAppUser.Update(u);
+                            var userMapper = _mapper.Map<UserDetailsDTO>(u);
+                            //userMapper.SecurityStamp = u.SecurityStamp;
+                            //userMapper.Id = u.Id;
+                            //_serviceAppUser.Update(userMapper);
+                            //var updatedUserResult = await _userManager.UpdateAsync(userMapper);
+                            //if (updatedUserResult.Succeeded)
+                            //{
+                                var result = _handleMessageUser.Add(Application.Enum.HandleMessageType.Success, "User updated successfully!", userMapper);
                                 return Ok(result); 
-                            }
-                            else
-                            {
-                                var result = _handleMessage.Add(Application.Enum.HandleMessageType.Error, "Problem to update user!");
-                                return Ok(result);
-                            }
+                            //}
+                            //else
+                            //{
+                            //    var result = _handleMessage.Add(Application.Enum.HandleMessageType.Error, "Problem to update user!");
+                            //    return Ok(result);
+                            //}
                         }
                         else
                         {
-                            var result = _handleMessage.Add(Application.Enum.HandleMessageType.Error, "Current password does not match!");
+                            var result = _handleMessageUser.Add(Application.Enum.HandleMessageType.Error, "Current password does not match!",null);
                             return Ok(result);
                         }                                              
                     }
                     else
                     {
-                        var result = _handleMessage.Add(Application.Enum.HandleMessageType.Error, "User was not find!");
+                        var result = _handleMessageUser.Add(Application.Enum.HandleMessageType.Error, "User was not find!",null);
                         return Ok(result);
                     }
                 }
                 else
                 {
-                    var result = _handleMessage.Add(Application.Enum.HandleMessageType.Error, "Problem to update user!");
+                    var result = _handleMessageUser.Add(Application.Enum.HandleMessageType.Error, "Problem to update user!",null);
                     return Ok(result);
                 }
             }
             catch (Exception ex)
             {
-                var result = _handleMessage.Add(Application.Enum.HandleMessageType.InternalErrors, "Something went wrong: !" + ex.ToString());
+                var result = _handleMessageUser.Add(Application.Enum.HandleMessageType.InternalErrors, "Something went wrong: !" + ex.ToString(),null);
                 return Ok(result);
             }
         }
