@@ -885,6 +885,7 @@
       "path": "microsoft.netcore.targets/2.0.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "lib/netstandard1.0/_._",
@@ -901,6 +902,7 @@
       "path": "netstandard.library/2.0.3",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "build/netstandard2.0/NETStandard.Library.targets",
@@ -1175,7 +1177,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Marcelo\\.nuget\\packages\\": {},
+    "C:\\Users\\Marce\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -1184,14 +1186,14 @@
       "projectUniqueName": "E:\\Marcelo\\Sandbox\\GIT\\VentingHere_v3\\VentingHere\\VentingHere.Application\\VentingHere.Application.csproj",
       "projectName": "VentingHere.Application",
       "projectPath": "E:\\Marcelo\\Sandbox\\GIT\\VentingHere_v3\\VentingHere\\VentingHere.Application\\VentingHere.Application.csproj",
-      "packagesPath": "C:\\Users\\Marcelo\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\Marce\\.nuget\\packages\\",
       "outputPath": "E:\\Marcelo\\Sandbox\\GIT\\VentingHere_v3\\VentingHere\\VentingHere.Application\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Marcelo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Marce\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

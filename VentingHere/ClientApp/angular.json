@@ -156,5 +156,8 @@
       }
     }
   },
-  "defaultProject": "VentingHere"
+  "defaultProject": "VentingHere",
+  "cli": {
+    "analytics": "50cf5f1b-4757-46ee-9a3b-3e49503589c4"
+  }
 }

@@ -10,6 +10,7 @@ namespace VentingHere.AutoMapper
         {
             CreateMap<User, UserDTO>().ReverseMap();
             CreateMap<User, UserLoginDTO>().ReverseMap();
+            CreateMap<Company, CompanyDTO>().ReverseMap();
             CreateMap<User, UserDetailsDTO>()
                 .ForMember(dest => dest.Fullname, opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.Userimage, opt => opt.MapFrom(src => src.Image))

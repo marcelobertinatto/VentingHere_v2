@@ -20,3 +20,8 @@
     height: 50px;
     width: 204.016px;
 } 
+
+
+.ng-autocomplete {
+  width: 100%;
+}

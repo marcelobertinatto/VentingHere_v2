@@ -13,6 +13,7 @@ E:\Marcelo\Sandbox\GIT\VentingHere_v2\VentingHere\VentingHere.Infra\obj\Debug\ne
 E:\Marcelo\Sandbox\GIT\VentingHere_v2\VentingHere\VentingHere.Infra\obj\Debug\netcoreapp2.2\VentingHere.Infra.dll
 E:\Marcelo\Sandbox\GIT\VentingHere_v2\VentingHere\VentingHere.Infra\obj\Debug\netcoreapp2.2\VentingHere.Infra.pdb
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\bin\Debug\netcoreapp2.2\VentingHere.Infra.deps.json
+E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\obj\Debug\netcoreapp2.2\VentingHere.Infra.AssemblyInfo.cs
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\bin\Debug\netcoreapp2.2\VentingHere.Infra.dll
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\bin\Debug\netcoreapp2.2\VentingHere.Infra.pdb
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\bin\Debug\netcoreapp2.2\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
@@ -22,7 +23,6 @@ E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\bin\Debug\ne
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\obj\Debug\netcoreapp2.2\VentingHere.Infra.csprojAssemblyReference.cache
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\obj\Debug\netcoreapp2.2\VentingHere.Infra.csproj.CoreCompileInputs.cache
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\obj\Debug\netcoreapp2.2\VentingHere.Infra.AssemblyInfoInputs.cache
-E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\obj\Debug\netcoreapp2.2\VentingHere.Infra.AssemblyInfo.cs
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\obj\Debug\netcoreapp2.2\VentingHere.Infra.csproj.CopyComplete
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\obj\Debug\netcoreapp2.2\VentingHere.Infra.dll
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\obj\Debug\netcoreapp2.2\VentingHere.Infra.pdb
