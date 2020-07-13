@@ -16,6 +16,7 @@ import { Authinterceptor } from './services/auth/Authinterceptor';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { UsersPageComponent } from './users-page/users-page.component';
 import { UserComplaintComponent } from './user-complaint/user-complaint.component';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 
 @NgModule({
    declarations: [
@@ -42,7 +43,8 @@ import { UserComplaintComponent } from './user-complaint/user-complaint.componen
     NgbModule,
     NgbAlertModule,
     ReactiveFormsModule,
-    SweetAlert2Module.forRoot()
+    SweetAlert2Module.forRoot(),
+    AutocompleteLibModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

@@ -11,6 +11,7 @@ E:\Marcelo\Sandbox\GIT\VentingHere_v2\VentingHere\VentingHere.Application\obj\De
 E:\Marcelo\Sandbox\GIT\VentingHere_v2\VentingHere\VentingHere.Application\obj\Debug\netcoreapp2.2\VentingHere.Application.dll
 E:\Marcelo\Sandbox\GIT\VentingHere_v2\VentingHere\VentingHere.Application\obj\Debug\netcoreapp2.2\VentingHere.Application.pdb
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Application\bin\Debug\netcoreapp2.2\VentingHere.Application.deps.json
+E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Application\obj\Debug\netcoreapp2.2\VentingHere.Application.AssemblyInfo.cs
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Application\bin\Debug\netcoreapp2.2\VentingHere.Application.dll
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Application\bin\Debug\netcoreapp2.2\VentingHere.Application.pdb
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Application\bin\Debug\netcoreapp2.2\VentingHere.Domain.dll
@@ -18,7 +19,6 @@ E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Application\bin\De
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Application\obj\Debug\netcoreapp2.2\VentingHere.Application.csprojAssemblyReference.cache
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Application\obj\Debug\netcoreapp2.2\VentingHere.Application.csproj.CoreCompileInputs.cache
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Application\obj\Debug\netcoreapp2.2\VentingHere.Application.AssemblyInfoInputs.cache
-E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Application\obj\Debug\netcoreapp2.2\VentingHere.Application.AssemblyInfo.cs
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Application\obj\Debug\netcoreapp2.2\VentingHere.Application.csproj.CopyComplete
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Application\obj\Debug\netcoreapp2.2\VentingHere.Application.dll
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Application\obj\Debug\netcoreapp2.2\VentingHere.Application.pdb
