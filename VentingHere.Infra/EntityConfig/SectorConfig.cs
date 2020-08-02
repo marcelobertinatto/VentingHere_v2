@@ -11,7 +11,12 @@ namespace VentingHere.Infra.EntityConfig
         {
             builder.HasKey(x => new { x.Id });
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
-           
+
+            //one to one -> Sector and ListCompanySector
+            builder.HasMany(x => x.ListCompanySector)
+                .WithOne(x => x.Sector)
+                .IsRequired(true);
+
         }
     }
 }

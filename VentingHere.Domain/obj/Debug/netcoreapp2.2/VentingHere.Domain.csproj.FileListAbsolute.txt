@@ -8,11 +8,11 @@ E:\Marcelo\Sandbox\GIT\VentingHere_v2\VentingHere\VentingHere.Domain\obj\Debug\n
 E:\Marcelo\Sandbox\GIT\VentingHere_v2\VentingHere\VentingHere.Domain\obj\Debug\netcoreapp2.2\VentingHere.Domain.pdb
 E:\Marcelo\Sandbox\GIT\VentingHere_v2\VentingHere\VentingHere.Domain\obj\Debug\netcoreapp2.2\VentingHere.Domain.csprojAssemblyReference.cache
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Domain\bin\Debug\netcoreapp2.2\VentingHere.Domain.deps.json
-E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Domain\obj\Debug\netcoreapp2.2\VentingHere.Domain.AssemblyInfo.cs
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Domain\bin\Debug\netcoreapp2.2\VentingHere.Domain.dll
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Domain\bin\Debug\netcoreapp2.2\VentingHere.Domain.pdb
-E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Domain\obj\Debug\netcoreapp2.2\VentingHere.Domain.csprojAssemblyReference.cache
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Domain\obj\Debug\netcoreapp2.2\VentingHere.Domain.csproj.CoreCompileInputs.cache
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Domain\obj\Debug\netcoreapp2.2\VentingHere.Domain.AssemblyInfoInputs.cache
+E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Domain\obj\Debug\netcoreapp2.2\VentingHere.Domain.AssemblyInfo.cs
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Domain\obj\Debug\netcoreapp2.2\VentingHere.Domain.dll
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Domain\obj\Debug\netcoreapp2.2\VentingHere.Domain.pdb
+E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Domain\obj\Debug\netcoreapp2.2\VentingHere.Domain.csprojAssemblyReference.cache

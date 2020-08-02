@@ -11,13 +11,21 @@ namespace VentingHere.Infra.EntityConfig
             builder.HasKey(x => new { x.Id });
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
 
-            //one to one -> Company and Sector
-            builder.HasOne(v => v.Sector)
-               .WithOne(a => a.Company)
-               .HasForeignKey<Sector>(b => b.CompanyId)
-               .IsRequired(true);
+            //one to many: Company and ListCompanyRates
+            builder.HasMany(x => x.ListCompanyRates)
+                .WithOne(x => x.Company)
+                .IsRequired(true);
 
-            builder.HasIndex(x => x.RateId).IsUnique(false);
+            //one to many: Company and ListCompanySubjectIssues
+            builder.HasMany(x => x.ListCompanySubjectIssues)
+                .WithOne(x => x.Company)
+                //OnDelete(DeleteBehavior.Restrict)
+                .IsRequired(true);
+
+            //one to one -> Company and ListCompanySector
+            builder.HasMany(x => x.ListCompanySector)
+                .WithOne(x => x.Company)
+                .IsRequired(true);
         }
     }
 }

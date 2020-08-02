@@ -21,6 +21,8 @@ namespace VentingHere.Application
 
         public List<TEntity> Find(System.Linq.Expressions.Expression<Func<TEntity, bool>> expression) => _serviceAppBase.Find(expression);
 
+        public List<TEntity> GetAll() => _serviceAppBase.GetAll();
+
         public TEntity FindById(int id) => _serviceAppBase.FindById(id);
 
         public void Remove(TEntity entity) => _serviceAppBase.Remove(entity);

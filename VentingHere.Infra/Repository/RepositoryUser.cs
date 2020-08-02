@@ -19,7 +19,8 @@ namespace VentingHere.Infra.Repository
         public Task<User> UserSummary(int userId)
         {
             return _ventingContext.Set<User>()
-                .Include(x => x.ListRates)
+                //Include(x => x.ListRates)
+                .Include(x => x.ListCompanyRates)
                 .Include(x => x.ListVents)      
                 .AsNoTracking().SingleAsync(x => x.Id == userId);
         }
