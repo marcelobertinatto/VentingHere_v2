@@ -7,6 +7,7 @@ namespace VentingHere.ModelView
 {
     public class CompanyDTO
     {
+        public int Id { get; set; }
         public string About { get; set; }
         public string CompanyName { get; set; }
         public string PhoneNumber { get; set; }

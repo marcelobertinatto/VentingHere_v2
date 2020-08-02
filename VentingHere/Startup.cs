@@ -128,9 +128,12 @@ namespace VentingHere
             services.AddScoped<IServiceAppContact, ServiceAppContact>();
             #endregion
 
-            #region HANDLE MESSAGE USER
+            #region HANDLE MESSAGE
             services.AddScoped<IHandleMessage<UserDetailsDTO>, HandleMessage<UserDetailsDTO>>();
+            services.AddScoped<IHandleMessage<CompanySubjectTellUsDTO>, HandleMessage<CompanySubjectTellUsDTO>>();
             services.AddScoped<IHandleMessage<List<CompanyDTO>>, HandleMessage<List<CompanyDTO>>>();
+            services.AddScoped<IHandleMessage<List<SubjectDTO>>, HandleMessage<List<SubjectDTO>>>();
+            services.AddScoped<IHandleMessage<List<SubjectIssueDTO>>, HandleMessage<List<SubjectIssueDTO>>>();
             #endregion
 
             #region ROLE
@@ -143,6 +146,24 @@ namespace VentingHere
             services.AddScoped<IRepositoryUserRole, RepositoryUserRole>();
             services.AddScoped<IServiceUserRole, ServiceUserRole>();
             services.AddScoped<IServiceAppUserRole, ServiceAppUserRole>();
+            #endregion
+
+            #region SUBJECT
+            services.AddScoped<IRepositorySubject, RepositorySubject>();
+            services.AddScoped<IServiceSubject, ServiceSubject>();
+            services.AddScoped<IServiceAppSubject, ServiceAppSubject>();
+            #endregion
+
+            #region SUBJECTISSUE
+            services.AddScoped<IRepositorySubjectIssue, RepositorySubjectIssue>();
+            services.AddScoped<IServiceSubjectIssue, ServiceSubjectIssue>();
+            services.AddScoped<IServiceAppSubjectIssue, ServiceAppSubjectIssue>();
+            #endregion
+
+            #region COMPANYSUBJECTISSUE
+            services.AddScoped<IRepositoryCompanySubjectIssue, RepositoryCompanySubjectIssue>();
+            services.AddScoped<IServiceCompanySubjectIssue, ServiceCompanySubjectIssue>();
+            services.AddScoped<IServiceAppCompanySubjectIssue, ServiceAppCompanySubjectIssue>();
             #endregion
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

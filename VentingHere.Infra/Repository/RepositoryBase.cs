@@ -28,6 +28,8 @@ namespace VentingHere.Infra.Repository
 
         public List<TEntity> Find(Expression<Func<TEntity, bool>> expression) => _ventingContext.Set<TEntity>().Where(expression).ToList();
 
+        public List<TEntity> GetAll() => _ventingContext.Set<TEntity>().ToList();
+
         public TEntity FindById(int id) => _ventingContext.Set<TEntity>().Find(id);
 
         public void Remove(TEntity entity)

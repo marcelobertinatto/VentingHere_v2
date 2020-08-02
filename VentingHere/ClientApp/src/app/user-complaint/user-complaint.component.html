@@ -1,4 +1,4 @@
-<section class="customSection bg-ice">
+<!-- <section class="customSection bg-ice">
   <div class="container">
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -36,33 +36,8 @@
                   <ng-template #notFoundTemplate let-notFound>
                     <div [innerHTML]="errorMsg"></div>                      
                   </ng-template>		
-                </div>
-                						
-                <!-- <div class="input-group">
-                  <input class="form-control py-2 border-right-0 border" formControlName="companySearch" type="search" placeholder="Search" 
-                  id="example-search-input" #searchInput />
-                  <span class="input-group-append">
-                    <button class="btn btn-outline-secondary border-left-0 border" type="button">
-                      <i class="fa fa-search"></i>
-                    </button>
-                    </span>
-                </div>  -->
-                <!-- <div class="combobox-options" *ngIf="!company">
-                  <list-item *ngFor="let item of company">{{item}}</list-item>
-                </div> -->
-                <!-- <ul class="filter-select">
-                  <li *ngFor="let com of company" class="filter-select-list">
-                    <img src="{{result.images['2']?.url}}" alt="" width="50" height="50"> 
-                    <p class="artist-name"> {{com}} </p>                
-                    <span class="tags" *ngFor='let genre of result?.genres  | slice:0:6'>{{genre}}</span>
-                </ul> -->
+                </div>     
               </div>     
-              <!-- <ul class="list-group" *ngIf="company">
-                <li class="list-group-item"
-                    *ngFor="let item of company">
-                    <p>{{item.companyName}}</p>                  
-                </li>
-              </ul>        -->
             </div>            
           </div>
           <div class="widget" *ngIf="errorMsg || company">
@@ -87,4 +62,185 @@
       </div>
     </div>
   </div>
+</section> -->
+<section class="customSection bg-ice">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h3 class="widget-header">Step 1 - Make your complaint</h3>
+        <ng-container>
+          <form [formGroup]="frmSaveUserComplaint">
+            <div class="widget">
+              <div class="form-group">
+                <label for="username">Company Name</label>
+                <div class="block d-flex">
+                  <div class="input-group">
+                    <ng-autocomplete 
+                      [data]="company" 
+                      [searchKeyword]="keyword" 
+                      historyIdentifier="company"
+                      (selected)='selectEvent($event)'
+                      (inputChanged)='getServerResponse($event)' 
+                      (inputFocused)='onFocused($event)' 
+                      [itemTemplate]="itemTemplate" 
+                      (inputCleared)="searchCleared()"
+                      [notFoundTemplate]="notFoundTemplate" 
+                      [debounceTime]="600" 
+                      [isLoading]="isLoadingResult" 
+                      [minQueryLength]="2" 
+                      placeHolder="Search for Companies' name">                  
+                    </ng-autocomplete>
+    
+                    <ng-template #itemTemplate let-item>
+                      <div class="item">
+                        <img src="{{'data:image/jpg;base64,' + item.logo}}" height="50">
+                        <span [innerHTML]="item.companyName"></span> &nbsp; | &nbsp;
+                        <small>WebSite: {{item.webSiteAddress}}</small>
+                      </div>                                          
+                    </ng-template>
+    
+                    <ng-template #notFoundTemplate let-notFound>
+                      <div [innerHTML]="errorMsg"></div>                      
+                    </ng-template>		
+                  </div>     
+                </div>     
+              </div>            
+            </div>
+            <div class="widget" *ngIf="notFound || company">
+              <h3 class="widget-header">Company's Details</h3>
+              <div class="form-group">
+                <label for="name">Name </label>
+                <input type="text" class="form-control" formControlName="companyName" [readonly]="company"
+                [ngClass]="{'is-invalid': frmSaveUserComplaint.get('companyName').errors,
+                'is-valid':frmSaveUserComplaint.get('companyName').valid}">
+                <div *ngIf="frmSaveUserComplaint.get('companyName').hasError('required') 
+                                  && frmSaveUserComplaint.get('companyName').touched" class="invalid-feedback mt-2">
+                                Please, don't give up. Tell us the company name!
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" class="form-control" formControlName="address" [readonly]="company"
+                [ngClass]="{'is-invalid': frmSaveUserComplaint.get('address').errors,
+                'is-valid':frmSaveUserComplaint.get('address').valid}">
+                <div *ngIf="frmSaveUserComplaint.get('address').hasError('required') 
+                                  && frmSaveUserComplaint.get('address').touched" class="invalid-feedback mt-2">
+                                Please, don't give up. Tell us the company's address!
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="website">WebSite</label>
+                <input type="text" class="form-control" formControlName="websiteaddress" [readonly]="company"
+                [ngClass]="{'is-invalid': frmSaveUserComplaint.get('websiteaddress').errors,
+                'is-valid':frmSaveUserComplaint.get('websiteaddress').valid}">
+                <div *ngIf="frmSaveUserComplaint.get('websiteaddress').hasError('required') 
+                                  && frmSaveUserComplaint.get('websiteaddress').touched" class="invalid-feedback mt-2">
+                                Please, don't give up. Tell us company's web site!
+                </div>
+              </div>
+            </div>
+
+            <div class="widget" *ngIf="notFound || company">
+              <h3 class="widget-header">Questions</h3>
+              <div class="form-group">
+                <label for="subject">Subject </label>
+                <select class="form-control" formControlName="subject" (change)="changeSubject($event.target.value)">
+                  <option [value]="">Choose your subject</option>
+                  <option *ngFor="let item of subjectItems" [value]="item.id">{{item.subjectText}}</option>
+                </select>                
+              </div>
+              <div class="form-group" *ngIf="subjectIssueItems && !notFindSubject">
+                <label for="subjectIssue">Subject Issue</label>
+                <select class="form-control" formControlName="subjectissue" (change)="changeSubjectIssue($event.target.value)">
+                  <option [value]="" selected>Choose your subject issue</option>
+                  <option *ngFor="let item of subjectIssueItems" [ngValue]="item.id">{{item.subjectIssueText}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="widget" *ngIf="notFindSubject">
+              <h3 class="widget-header">Complaint</h3>
+              <div class="form-group">
+                <label for="subjectdescribed">Subject </label>
+                <input type="text" class="form-control" formControlName="subjectdescribed" 
+                [ngClass]="{'is-invalid': frmSaveUserComplaint.get('subjectissuedescribed').errors,
+                'is-valid':frmSaveUserComplaint.get('subjectdescribed').valid}">
+                <div *ngIf="frmSaveUserComplaint.get('subjectdescribed').hasError('required') 
+                                  && frmSaveUserComplaint.get('subjectdescribed').touched" class="invalid-feedback mt-2">
+                                Please, don't give up. Tell us the subject!
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="subjectissuedescribed">Subject Issue</label>
+                <input type="text" class="form-control" formControlName="subjectissuedescribed" 
+                [ngClass]="{'is-invalid': frmSaveUserComplaint.get('subjectissuedescribed').errors,
+                'is-valid':frmSaveUserComplaint.get('subjectissuedescribed').valid}">
+                <div *ngIf="frmSaveUserComplaint.get('subjectissuedescribed').hasError('required') 
+                                  && frmSaveUserComplaint.get('subjectissuedescribed').touched" class="invalid-feedback mt-2">
+                                Please, don't give up. Tell us the subject issue!
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="tellus">Tell us about what happened?!</label>
+                <textarea class="form-control" formControlName="tellus" rows="5"
+                [ngClass]="{'is-invalid': frmSaveUserComplaint.get('tellus').errors,
+                            'is-valid':frmSaveUserComplaint.get('tellus').valid}"></textarea>
+                <div *ngIf="frmSaveUserComplaint.get('tellus').hasError('required') 
+                                  && frmSaveUserComplaint.get('tellus').touched" class="invalid-feedback mt-2">
+                                Please, don't give up. Tell us your story!
+                </div>
+              </div>
+            </div>
+          </form>
+        </ng-container>
+        
+        
+        <div class="block d-flex justify-content-center" *ngIf="frmSaveUserComplaint.valid">
+          <button class="btn btn-main btn-block" (click)="save()">SAVE</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
+ 
+<!--<section class="customSection bg-ice">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <ul class="nav nav-tabs">
+          <div class="liner"></div>
+          <li class="nav-item nav-link active">
+            <i class="fa fa-home"></i> Home
+          </li>
+
+          <li class="nav-item nav-link">
+            <i class="fa fa-user"></i> Profile
+          </li>
+
+          <li class="nav-item nav-link">
+            <i class="fa fa-envelope"></i> Messages
+          </li>
+
+          <li class="nav-item nav-link">
+            <i class="fa fa-line-chart"></i> Reports
+          </li>
+        </ul>
+         <nav class="nav nav-tabs">
+          <div class="liner"></div>
+          <a href="#" class="nav-item nav-link active">
+              <i class="fa fa-home"></i> Home
+          </a>
+          <a href="#" class="nav-item nav-link">
+              <i class="fa fa-user"></i> Profile
+          </a>
+          <a href="#" class="nav-item nav-link">
+              <i class="fa fa-envelope"></i> Messages
+          </a>
+          <a href="#" class="nav-item nav-link disabled" tabindex="-1">
+              <i class="fa fa-line-chart"></i> Reports
+          </a>
+      </nav> 
+      </div>
+    </div>
+  </div>
+</section>-->

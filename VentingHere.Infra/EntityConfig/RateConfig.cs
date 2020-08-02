@@ -11,17 +11,10 @@ namespace VentingHere.Infra.EntityConfig
             builder.HasKey(x => new { x.Id });
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
 
-            //one to many: User and Rates
-            builder.HasOne(x => x.User)
-                .WithMany(x => x.ListRates)
-                .HasForeignKey(x => x.UserId)
-                .IsRequired(false);
-
             //one to one -> Company and Rate
-            builder.HasOne(x => x.Company)
+            builder.HasMany(x => x.ListCompanyRates)
                 .WithOne(x => x.Rate)
-                .HasForeignKey<Company>(x => x.RateId)
-                .IsRequired(false);
+                .IsRequired(true);
         }
     }
 }

@@ -129,15 +129,90 @@ namespace VentingHere.Infra.Migrations
 
                     b.Property<string>("PhoneNumber");
 
-                    b.Property<int?>("RateId");
+                    b.Property<int?>("SubjectId");
+
+                    b.Property<int?>("SubjectIssueId");
 
                     b.Property<string>("WebSiteAddress");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RateId");
+                    b.HasIndex("SubjectId");
+
+                    b.HasIndex("SubjectIssueId");
 
                     b.ToTable("Company");
+                });
+
+            modelBuilder.Entity("VentingHere.Domain.Entities.CompanyRate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CompanyId");
+
+                    b.Property<int>("RateId");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("RateId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("CompanyRate");
+                });
+
+            modelBuilder.Entity("VentingHere.Domain.Entities.CompanySector", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CompanyId");
+
+                    b.Property<int>("SectorId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("SectorId");
+
+                    b.ToTable("CompanySector");
+                });
+
+            modelBuilder.Entity("VentingHere.Domain.Entities.CompanySubjectIssue", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CompanyId");
+
+                    b.Property<int>("SubjectId");
+
+                    b.Property<int>("SubjectIssueId");
+
+                    b.Property<string>("TellUs");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.HasIndex("SubjectIssueId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("CompanySubjectIssue");
                 });
 
             modelBuilder.Entity("VentingHere.Domain.Entities.Contact", b =>
@@ -163,13 +238,9 @@ namespace VentingHere.Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("UserId");
-
                     b.Property<int>("numStar");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Rate");
                 });
@@ -205,16 +276,41 @@ namespace VentingHere.Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CompanyId");
-
                     b.Property<string>("SectorName");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CompanyId")
-                        .IsUnique();
-
                     b.ToTable("Sector");
+                });
+
+            modelBuilder.Entity("VentingHere.Domain.Entities.Subject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("SubjectText");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Subject");
+                });
+
+            modelBuilder.Entity("VentingHere.Domain.Entities.SubjectIssue", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("SubjectId");
+
+                    b.Property<string>("SubjectIssueText");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("SubjectIssue");
                 });
 
             modelBuilder.Entity("VentingHere.Domain.Entities.User", b =>
@@ -362,33 +458,88 @@ namespace VentingHere.Infra.Migrations
                 {
                     b.HasOne("VentingHere.Domain.Entities.User", "User")
                         .WithMany("ListReplies")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("VentingHere.Domain.Entities.Vent", "Vent")
                         .WithMany("ListReplies")
-                        .HasForeignKey("VentId");
+                        .HasForeignKey("VentId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("VentingHere.Domain.Entities.Company", b =>
                 {
-                    b.HasOne("VentingHere.Domain.Entities.Rate", "Rate")
-                        .WithOne("Company")
-                        .HasForeignKey("VentingHere.Domain.Entities.Company", "RateId");
+                    b.HasOne("VentingHere.Domain.Entities.Subject")
+                        .WithMany("ListCompanies")
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("VentingHere.Domain.Entities.SubjectIssue")
+                        .WithMany("ListCompanies")
+                        .HasForeignKey("SubjectIssueId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("VentingHere.Domain.Entities.Rate", b =>
-                {
-                    b.HasOne("VentingHere.Domain.Entities.User", "User")
-                        .WithMany("ListRates")
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("VentingHere.Domain.Entities.Sector", b =>
+            modelBuilder.Entity("VentingHere.Domain.Entities.CompanyRate", b =>
                 {
                     b.HasOne("VentingHere.Domain.Entities.Company", "Company")
-                        .WithOne("Sector")
-                        .HasForeignKey("VentingHere.Domain.Entities.Sector", "CompanyId")
+                        .WithMany("ListCompanyRates")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("VentingHere.Domain.Entities.Rate", "Rate")
+                        .WithMany("ListCompanyRates")
+                        .HasForeignKey("RateId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("VentingHere.Domain.Entities.User", "User")
+                        .WithMany("ListCompanyRates")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("VentingHere.Domain.Entities.CompanySector", b =>
+                {
+                    b.HasOne("VentingHere.Domain.Entities.Company", "Company")
+                        .WithMany("ListCompanySector")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("VentingHere.Domain.Entities.Sector", "Sector")
+                        .WithMany("ListCompanySector")
+                        .HasForeignKey("SectorId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("VentingHere.Domain.Entities.CompanySubjectIssue", b =>
+                {
+                    b.HasOne("VentingHere.Domain.Entities.Company", "Company")
+                        .WithMany("ListCompanySubjectIssues")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("VentingHere.Domain.Entities.Subject", "Subject")
+                        .WithMany("ListCompanySubjectIssues")
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("VentingHere.Domain.Entities.SubjectIssue", "SubjectIssue")
+                        .WithMany("ListCompanySubjectIssues")
+                        .HasForeignKey("SubjectIssueId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("VentingHere.Domain.Entities.User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("VentingHere.Domain.Entities.SubjectIssue", b =>
+                {
+                    b.HasOne("VentingHere.Domain.Entities.Subject", "Subject")
+                        .WithMany("SubjectIssue")
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("VentingHere.Domain.Entities.UserRole", b =>
@@ -396,12 +547,12 @@ namespace VentingHere.Infra.Migrations
                     b.HasOne("VentingHere.Domain.Entities.Role", "Role")
                         .WithMany("ListUserRoles")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("VentingHere.Domain.Entities.User", "User")
                         .WithMany("ListUserRoles")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("VentingHere.Domain.Entities.Vent", b =>
@@ -409,12 +560,12 @@ namespace VentingHere.Infra.Migrations
                     b.HasOne("VentingHere.Domain.Entities.Company", "Company")
                         .WithMany("ListVents")
                         .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("VentingHere.Domain.Entities.User", "User")
                         .WithMany("ListVents")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }

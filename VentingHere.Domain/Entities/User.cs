@@ -17,9 +17,9 @@ namespace VentingHere.Domain.Entities
         public string Phone { get; set; }
         public DateTime? LastLogin { get; set; }
         public DateTime UserFirstRegister { get; set; }
-        public virtual IEnumerable<Rate> ListRates { get; set; }
         public virtual IEnumerable<Vent> ListVents { get; set; }
         public virtual IEnumerable<Answer> ListReplies { get; set; }
         public virtual List<UserRole> ListUserRoles { get; set; }
+        public virtual IEnumerable<CompanyRate> ListCompanyRates { get; set; }
     }
 }

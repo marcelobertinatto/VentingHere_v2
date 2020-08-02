@@ -14,6 +14,7 @@ namespace VentingHere.Domain.Repository.Services
         void RemoveRange(List<TEntity> entities);
         TEntity FindById(int id);
         List<TEntity> Find(Expression<Func<TEntity, bool>> expression);
+        List<TEntity> GetAll();
         void Dispose();
     }
 }

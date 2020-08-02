@@ -22,6 +22,7 @@ namespace VentingHere.Domain
         public void Dispose() => _repositoryBase.Dispose();
 
         public List<TEntity> Find(Expression<Func<TEntity, bool>> expression) => _repositoryBase.Find(expression);
+        public List<TEntity> GetAll() => _repositoryBase.GetAll();
 
         public TEntity FindById(int id) => _repositoryBase.FindById(id);
 

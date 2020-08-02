@@ -1,4 +1,5 @@
 export class Company {
+    id: number;
     about: string;
     companyname: string;
     phonenumber: string;
