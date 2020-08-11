@@ -7,6 +7,9 @@ import { AuthService } from '../services/auth/AuthService';
 import { User } from '../models/user';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { UserService } from '../services/User/User.service';
+import { Usersummary } from '../models/usersummary';
+import { Companysubjecttellus } from '../models/companysubjecttellus';
 
 @Component({
   selector: 'app-users-page',
@@ -17,10 +20,13 @@ export class UsersPageComponent implements OnInit {
 
   public user: User;
   public u: Userdetailsdto;
+  public userSummary: Usersummary;
   fileUploadProgress: string = null;
   frmSaveUserDetails: FormGroup;
+  enableUserSummary: boolean = false;
 
-  constructor(private userService: AuthService, private formBuilder: FormBuilder, private cd: ChangeDetectorRef, private router: Router) { }
+  constructor(private userService: AuthService, private usService: UserService,
+    private formBuilder: FormBuilder, private cd: ChangeDetectorRef, private router: Router) { }
 
   ngOnInit() {
     if (sessionStorage.getItem('token') !== null) {
@@ -29,6 +35,7 @@ export class UsersPageComponent implements OnInit {
     this.user = this.userService.user;
     this.u = new Userdetailsdto();
     this.validation();
+    this.getusercomplaints(this.user.id);
   }
 
   // tslint:disable-next-line: use-lifecycle-interface
@@ -120,4 +127,30 @@ export class UsersPageComponent implements OnInit {
     this.userService.session_cleaner();
     this.router.navigate(['/']);
   }
+
+  public enableComplaints(){
+    if(this.userSummary !== undefined || this.userSummary !== null) {
+      this.enableUserSummary = true;
+    }
+  }
+
+  public getusercomplaints(id: number) {
+    const _this = this;
+    this.usService.getuserscomplaint(id).subscribe(
+      data => {
+        const d = Object.keys(data);
+        const msgId = data[d[0]];
+        const msg = data[d[1]];
+        const returnedU = data[d[2]] as Usersummary;
+        if (returnedU != null && msgId === 2) {
+          _this.userSummary = returnedU;
+        }
+      }
+    );
+  }
+
+  getcomplaintdetailspage(comp: Companysubjecttellus) { 
+    this.router.navigateByUrl('/complaintdetails/', { state: {id: comp} });
+  }
+
 }

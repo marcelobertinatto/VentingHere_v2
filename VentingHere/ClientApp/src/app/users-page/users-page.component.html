@@ -20,7 +20,7 @@
                 <i class="fas fa-angry fa-2x"></i>
               </li>
               <li class="list-inline-item mb-2 align-middle">
-                My Complaints
+                <a href="javascript:void(0);" (click)="enableComplaints()" [ngClass]="{'a-custom': userSummary}">My Complaints ({{userSummary.totalOfComplaints}})</a>
               </li>
             </ul>
             <!-- <ul class="list-inline ml-3">
@@ -68,7 +68,7 @@
           </div>
         </div>
       </div>
-      <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
+      <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8" *ngIf="!enableUserSummary">
         <form [formGroup]="frmSaveUserDetails">
           <div class="widget">
             <h3 class="widget-header">Edit Personal Information</h3>
@@ -111,6 +111,32 @@
         <div class="block d-flex">
           <button class="btn btn-main btn-block" (click)="saveUserDetails()">SAVE</button>
         </div>
+      </div>
+
+      <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8" *ngIf="enableUserSummary">
+        <div class="widget">
+          <h3 class="widget-header">My complaints</h3>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col" class="text-center">Id</th>
+                <th scope="col" class="text-center">Company Name</th>
+                <th scope="col" class="text-center">Date/Time</th>
+                <th scope="col" class="text-center">Subject Issue</th>
+                <th scope="col" class="text-center">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of userSummary.listCompanies" (click)="getcomplaintdetailspage(item)" [state]=item.id>
+                <td scope="row" class="text-center">{{item.id}}</td>
+                <td scope="row" class="text-center">{{item.company.companyName}}</td>
+                <td scope="row" class="text-center">{{item.dateAndTime | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+                <td scope="row" class="text-center">{{item.subjectIssue.subjectIssueText}}</td>
+                <td scope="row" class="text-center">{{item.tellUs}}</td>
+              </tr>           
+            </tbody>
+          </table>
+        </div>        
       </div>
     </div>
   </div>

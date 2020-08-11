@@ -26,7 +26,7 @@ namespace VentingHere.Infra.Repository
 
         public void Dispose() => _ventingContext.Dispose();
 
-        public List<TEntity> Find(Expression<Func<TEntity, bool>> expression) => _ventingContext.Set<TEntity>().Where(expression).ToList();
+        public virtual List<TEntity> Find(Expression<Func<TEntity, bool>> expression) => _ventingContext.Set<TEntity>().Where(expression).ToList();
 
         public List<TEntity> GetAll() => _ventingContext.Set<TEntity>().ToList();
 

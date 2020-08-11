@@ -134,6 +134,7 @@ namespace VentingHere
             services.AddScoped<IHandleMessage<List<CompanyDTO>>, HandleMessage<List<CompanyDTO>>>();
             services.AddScoped<IHandleMessage<List<SubjectDTO>>, HandleMessage<List<SubjectDTO>>>();
             services.AddScoped<IHandleMessage<List<SubjectIssueDTO>>, HandleMessage<List<SubjectIssueDTO>>>();
+            services.AddScoped<IHandleMessage<UserSummary>, HandleMessage<UserSummary>>();
             #endregion
 
             #region ROLE

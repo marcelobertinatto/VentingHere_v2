@@ -16,6 +16,7 @@ using VentingHere.AutoMapper;
 using VentingHere.Domain.Entities;
 using VentingHere.ModelView;
 using Microsoft.AspNetCore.Http;
+using System.Linq;
 
 namespace VentingHere.Controllers
 {
@@ -29,11 +30,15 @@ namespace VentingHere.Controllers
         private readonly IMapper _mapper;
         private readonly IConfiguration _config;
         private readonly IHandleMessage<UserDetailsDTO> _handleMessageUser;
+        private readonly IHandleMessage<UserSummary> _handleMessageUserSummary;
+        private readonly IServiceAppCompanySubjectIssue _serviceAppCompanySubjectIssue;
         #endregion
 
         public UserController(IServiceAppUser serviceAppUser, UserManager<User> userManager, SignInManager<User> signInManager,
             IMapper mapper,
             IConfiguration config,
+            IServiceAppCompanySubjectIssue serviceAppCompanySubjectIssue,
+            IHandleMessage<UserSummary> handleMessageUserSummary,
             IHandleMessage<UserDetailsDTO> handleMessageUser)
         {
             _serviceAppUser = serviceAppUser;
@@ -41,6 +46,8 @@ namespace VentingHere.Controllers
             _signInManager = signInManager;
             _mapper = mapper;
             _config = config;
+            _serviceAppCompanySubjectIssue = serviceAppCompanySubjectIssue;
+            _handleMessageUserSummary = handleMessageUserSummary;
             _handleMessageUser = handleMessageUser;
         }
 
@@ -228,6 +235,43 @@ namespace VentingHere.Controllers
             }
         }
 
+        [HttpPost("getusercomplaints")]
+        public IActionResult GetUserComplaints([FromBody] int userId)
+        {
+            try
+            {
+                if (userId != 0)
+                {
+                    var u = _serviceAppCompanySubjectIssue.Find(x => x.UserId == userId).Distinct().ToList();
+
+                    if (u != null)
+                    {
+                        var userSummary = new UserSummary();
+                        userSummary.TotalOfComplaints = u.Count;
+                        userSummary.ListCompanies = u;
+
+                        var result = _handleMessageUserSummary.Add(Application.Enum.HandleMessageType.Success, "List of complaints found!", userSummary);
+                        return Ok(result);
+                    }
+                    else
+                    {
+                        var result = _handleMessageUserSummary.Add(Application.Enum.HandleMessageType.Error, "List of complaints not found!", null);
+                        return Ok(result);
+                    }
+                }
+                else
+                {
+                    var result = _handleMessageUserSummary.Add(Application.Enum.HandleMessageType.Error, "Problem to find a list of complaints!", null);
+                    return Ok(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                var result = _handleMessageUserSummary.Add(Application.Enum.HandleMessageType.InternalErrors, "Something went wrong: !" + ex.ToString(), null);
+                return Ok(result);
+            }
+        }
+
         #region PRIVATE METHODS
         private async Task<string> GenerateJWToken(User user)
         {
@@ -255,7 +299,6 @@ namespace VentingHere.Controllers
                 Expires = DateTime.Now.AddDays(1),
                 SigningCredentials = creds
             };
-
             var tokenHandler = new JwtSecurityTokenHandler();
 
             var token = tokenHandler.CreateToken(tokenDescriptor);

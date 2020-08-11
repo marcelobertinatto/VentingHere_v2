@@ -25,8 +25,11 @@ export class UserComplaintComponent implements OnInit {
 
   frmSaveUserComplaint: FormGroup;
   public company: Company;
-  private saveCo: Company;
   private saveCompanySubjectTellUs: Companysubjecttellus;
+  private companyId: number;
+  private subjectId: number;
+  private subjectIssueId: number;
+  tellUs: boolean;
   apiResponse: any;
   isLoadingResult: boolean;
   keyword = 'companyName';
@@ -91,6 +94,7 @@ export class UserComplaintComponent implements OnInit {
   
   ngOnInit() {
     const _this = this;
+    this.saveCompanySubjectTellUs = new Companysubjecttellus();
     this.validation();
     
     this.companyService.getSubject().subscribe(
@@ -114,7 +118,7 @@ export class UserComplaintComponent implements OnInit {
   selectEvent(item) {
     this.notFound = null;
     this.frmSaveUserComplaint.patchValue({companyName: item.companyName, websiteaddress: item.webSiteAddress, address: item.address});
-    this.saveCompanySubjectTellUs.companyid = item.id;
+    this.companyId = item.id;
   }
 
   onChangeSearch(val: string) {
@@ -148,35 +152,32 @@ export class UserComplaintComponent implements OnInit {
     if(this.frmSaveUserComplaint.valid && this.userService.user !== null && this.userService.user !== undefined) {
       this.saveCompanySubjectTellUs = this.frmSaveUserComplaint.value;
       this.saveCompanySubjectTellUs.userId = this.userService.user.id;
+      this.saveCompanySubjectTellUs.companyid = this.companyId;
+      this.saveCompanySubjectTellUs.subjectId = this.subjectId;
+      this.saveCompanySubjectTellUs.subjectIssueId = this.subjectIssueId;
 
       this.companyService.saveCompanySubjectTellUs(this.saveCompanySubjectTellUs).subscribe(
         data => {
-          if (data['Success'] != null) {
+          const res = Object.keys(data);
+          const returnedValue = data[res[1]];
+          const id = data[res[0]] as number;
+          if (id === 2) {
             Swal.fire({
               position: 'top-end',
               title: 'Nicee...',
-              text: data['Success'],
+              text: returnedValue,
               icon: 'success',
               timer: 3500
             }).then(() => {
-              this.router.navigate(['/']);
+              this.router.navigate(['/userspage']);
             });
-          } else {
-            if (data['Error'] != null) {
+          } else {            
               Swal.fire({
                 position: 'top-end',
                 icon: 'error',
-                text: data['Error'],
+                text: returnedValue,
                 timer: 3500
-              });
-            } else {
-              Swal.fire({
-                position: 'top-end',
-                icon: 'error',
-                text: data['InternalErrors'],
-                timer: 3500
-              });
-            }
+              });            
           }
         }, err => {
           Swal.fire({
@@ -206,6 +207,7 @@ export class UserComplaintComponent implements OnInit {
       this.notFindSubject = true;
       this.frmSaveUserComplaint.patchValue({subjectdescribed: '', subjectissuedescribed: '', tellus: '', subjectissue: 'a'});
     } else {
+      this.subjectId = subjectId;
       this.companyService.getSubjectIssue(subjectId).subscribe(
         res => {
          const data = Object.keys(res);
@@ -218,6 +220,8 @@ export class UserComplaintComponent implements OnInit {
    }
 
    changeSubjectIssue(e) {
-    this.frmSaveUserComplaint.patchValue({subjectdescribed: 'a', subjectissuedescribed: 'a',tellus: 'a'});
+    this.subjectIssueId = e;
+    this.frmSaveUserComplaint.patchValue({subjectdescribed: 'a', subjectissuedescribed: 'a'});
+    this.tellUs = true;
    }
 }
