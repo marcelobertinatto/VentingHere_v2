@@ -2,25 +2,8 @@
     padding: 100px 0;    
 }
 
-.bg-gray {
-    background: #F5F5F5;
-}
-
-.bg-middarkgray {
-    background: #5e6163;
-}
-
 .bg-ice {
     background: #e6e4e4;
-}
-
-.a-custom {
-    color: #666;
-    font-weight: bold;
-}
-
-a {
-    color: #666;
 }
 
 .card_custom {
@@ -72,6 +55,22 @@ a {
     outline: rgb(136, 136, 136) none 0px;
 }
 
+.p_custom1 {
+    box-sizing: border-box;
+    color: rgb(136, 136, 136);
+    text-align: left;
+    text-decoration: none solid rgb(136, 136, 136);
+    text-size-adjust: 100%;
+    column-rule-color: rgb(136, 136, 136);
+    perspective-origin: 145px 10.5px;
+    transform-origin: 145px 10.5px;
+    caret-color: rgb(136, 136, 136);
+    border: 0px none rgb(136, 136, 136);
+    font: 14px / 21px Muli, sans-serif;
+    margin: 0px 0px 16px;
+    outline: rgb(136, 136, 136) none 0px;
+}
+
 .widget {
     background: #fff;
     box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
@@ -86,33 +85,7 @@ a {
     font-weight: 600;
     margin-bottom: 20px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #dedede;
-}
-
-label {
-    font-size: 14px;
-    letter-spacing: 0;
-    color: #848484;
-}
-
-.form-control {
-    border-radius: 2px;
-    height: 50px;
-    background-color: transparent;
-    color: #666;
-    box-shadow: none;
-    font-size: 15px;
-}
-
-.widget .form-group i {
-    color: white;
-    background: #5672f9;
-    font-size: 25px;
-    height: 50px;
-    width: 50px;
-    line-height: 50px;
-    margin-right: 15px;
-    border-radius: 100%;
+    /* border-bottom: 1px solid #dedede; */
 }
 
 .btn-main {

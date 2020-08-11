@@ -153,14 +153,14 @@
                 <label for="subjectIssue">Subject Issue</label>
                 <select class="form-control" formControlName="subjectissue" (change)="changeSubjectIssue($event.target.value)">
                   <option [value]="" selected>Choose your subject issue</option>
-                  <option *ngFor="let item of subjectIssueItems" [ngValue]="item.id">{{item.subjectIssueText}}</option>
+                  <option *ngFor="let item of subjectIssueItems" [value]="item.id">{{item.subjectIssueText}}</option>
                 </select>
               </div>
             </div>
 
-            <div class="widget" *ngIf="notFindSubject">
-              <h3 class="widget-header">Complaint</h3>
-              <div class="form-group">
+            <div class="widget" *ngIf="notFindSubject || tellUs">
+              <h3 class="widget-header" >Complaint</h3>
+              <div class="form-group" *ngIf="notFindSubject">
                 <label for="subjectdescribed">Subject </label>
                 <input type="text" class="form-control" formControlName="subjectdescribed" 
                 [ngClass]="{'is-invalid': frmSaveUserComplaint.get('subjectissuedescribed').errors,
@@ -170,7 +170,7 @@
                                 Please, don't give up. Tell us the subject!
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group" *ngIf="notFindSubject">
                 <label for="subjectissuedescribed">Subject Issue</label>
                 <input type="text" class="form-control" formControlName="subjectissuedescribed" 
                 [ngClass]="{'is-invalid': frmSaveUserComplaint.get('subjectissuedescribed').errors,
@@ -180,7 +180,7 @@
                                 Please, don't give up. Tell us the subject issue!
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group" *ngIf="notFindSubject || tellUs">
                 <label for="tellus">Tell us about what happened?!</label>
                 <textarea class="form-control" formControlName="tellus" rows="5"
                 [ngClass]="{'is-invalid': frmSaveUserComplaint.get('tellus').errors,

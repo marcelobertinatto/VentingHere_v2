@@ -7,6 +7,7 @@ import { CustomValidators } from '../helpers/customValidators';
 import { Router } from '@angular/router';
 import { User } from '../models/user';
 import Swal from 'sweetalert2';
+// import { SocialAuthService, FacebookLoginProvider, SocialUser } from 'angularx-social-login';
 
 const ngbModalOptions: NgbModalOptions = {
   backdrop: 'static',
@@ -25,10 +26,13 @@ export class UserLoginComponent implements OnInit {
   loginForm: FormGroup;
   public returnUrl: string;
   public u: User;
+  // userFB: SocialUser;
+  // loggedIn: boolean;
 
   constructor(private modal: ModalService, private formBuilder: FormBuilder, private authService: AuthService,
-    private router: Router) {
-  }
+    private router: Router) { }
+    // , private socialAuthService: SocialAuthService) {
+  
 
   ngOnInit(): void {
     this.validation();
@@ -86,5 +90,18 @@ export class UserLoginComponent implements OnInit {
   close() {
     this.modal.close();
   }
+
+  // signInWithFB(): void {
+  //   this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then(
+  //     (response) => {
+  //       this.userFB = response;
+  //     }
+  //   );
+    
+  // }
+ 
+  // signOut(): void {
+  //   this.socialAuthService.signOut();
+  // }
 
 }

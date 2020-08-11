@@ -124,7 +124,7 @@ namespace VentingHere.Controllers
         }
 
         [HttpPost("savecompanytellus")]
-        public IActionResult SaveCompany([FromBody] CompanySubjectTellUsDTO companySubjectTellUsDTO)
+        public IActionResult SaveCompanyTellUs([FromBody] CompanySubjectTellUsDTO companySubjectTellUsDTO)
         {
             try
             {
@@ -133,6 +133,7 @@ namespace VentingHere.Controllers
                     if (companySubjectTellUsDTO.SubjectId != 0 && companySubjectTellUsDTO.SubjectIssueId != 0)
                     {
                         var companySubjectIssueTellUs = _mapper.Map<CompanySubjectIssue>(companySubjectTellUsDTO);
+                        companySubjectIssueTellUs.DateAndTime = DateTime.Now;
                         _serviceAppCompanySubjectIssue.Add(companySubjectIssueTellUs);
                         var re = _handleMessageUser.Add(Application.Enum.HandleMessageType.Success, "Complaint registered successfully!", null);
                         return Ok(re);
@@ -168,6 +169,7 @@ namespace VentingHere.Controllers
                                 companySubjectTellUsDTO.CompanyId = company.Id; 
 
                                 var companySubjectIssueTellUs = _mapper.Map<CompanySubjectIssue>(companySubjectTellUsDTO);
+                                companySubjectIssueTellUs.DateAndTime = DateTime.Now;
                                 _serviceAppCompanySubjectIssue.Add(companySubjectIssueTellUs);
                             }
                             else
@@ -175,6 +177,7 @@ namespace VentingHere.Controllers
                                 companySubjectTellUsDTO.CompanyId = co.Id;
 
                                 var companySubjectIssueTellUs = _mapper.Map<CompanySubjectIssue>(companySubjectTellUsDTO);
+                                companySubjectIssueTellUs.DateAndTime = DateTime.Now;
                                 _serviceAppCompanySubjectIssue.Add(companySubjectIssueTellUs);
                             }
                         }

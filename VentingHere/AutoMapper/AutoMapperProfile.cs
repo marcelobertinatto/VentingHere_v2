@@ -30,6 +30,7 @@ namespace VentingHere.AutoMapper
                 .ForMember(dest => dest.SubjectIssueId, opt => opt.MapFrom(src => src.SubjectIssueId))
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
                 .ForMember(dest => dest.CompanyId, opt => opt.MapFrom(src => src.CompanyId))
+                .ForMember(dest => dest.DateAndTime, opt => opt.MapFrom(src => src.DateAndTime))
                 .ReverseMap();
             CreateMap<CompanySubjectTellUsDTO, Subject>()
                 .ForMember(dest => dest.SubjectText, opt => opt.MapFrom(src => src.SubjectDescribed))

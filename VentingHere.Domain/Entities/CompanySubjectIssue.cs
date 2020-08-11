@@ -7,6 +7,7 @@ namespace VentingHere.Domain.Entities
     public class CompanySubjectIssue
     {
         public int Id { get; set; }
+        public DateTime DateAndTime { get; set; }
         public string TellUs { get; set; }
         public int CompanyId { get; set; }
         public virtual Company Company { get; set; }

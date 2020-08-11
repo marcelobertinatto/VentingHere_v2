@@ -11,6 +11,7 @@ namespace VentingHere.ModelView
         public string WebSiteAddress { get; set; }
         public string Address { get; set; }
         public string TellUs { get; set; }
+        public DateTime DateAndTime { get; set; }
         public int UserId { get; set; }
         public int CompanyId { get; set; }
         public int SubjectId { get; set; }
