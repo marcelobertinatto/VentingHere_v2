@@ -13,7 +13,7 @@ export class ComplaintDetailsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.complaintDetails = history.state.id;
+    this.complaintDetails = history.state;
   }
 
 }

@@ -3597,11 +3597,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Marcelo\\Sandbox\\GIT\\VentingHere_v3\\VentingHere\\VentingHere.Infra\\VentingHere.Infra.csproj",
+      "projectUniqueName": "D:\\Marcelo\\Sandbox\\GIT\\VentingHere_v3\\VentingHere\\VentingHere.Infra\\VentingHere.Infra.csproj",
       "projectName": "VentingHere.Infra",
-      "projectPath": "E:\\Marcelo\\Sandbox\\GIT\\VentingHere_v3\\VentingHere\\VentingHere.Infra\\VentingHere.Infra.csproj",
+      "projectPath": "D:\\Marcelo\\Sandbox\\GIT\\VentingHere_v3\\VentingHere\\VentingHere.Infra\\VentingHere.Infra.csproj",
       "packagesPath": "C:\\Users\\Marce\\.nuget\\packages\\",
-      "outputPath": "E:\\Marcelo\\Sandbox\\GIT\\VentingHere_v3\\VentingHere\\VentingHere.Infra\\obj\\",
+      "outputPath": "D:\\Marcelo\\Sandbox\\GIT\\VentingHere_v3\\VentingHere\\VentingHere.Infra\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -3620,8 +3620,8 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "E:\\Marcelo\\Sandbox\\GIT\\VentingHere_v3\\VentingHere\\VentingHere.Domain\\VentingHere.Domain.csproj": {
-              "projectPath": "E:\\Marcelo\\Sandbox\\GIT\\VentingHere_v3\\VentingHere\\VentingHere.Domain\\VentingHere.Domain.csproj"
+            "D:\\Marcelo\\Sandbox\\GIT\\VentingHere_v3\\VentingHere\\VentingHere.Domain\\VentingHere.Domain.csproj": {
+              "projectPath": "D:\\Marcelo\\Sandbox\\GIT\\VentingHere_v3\\VentingHere\\VentingHere.Domain\\VentingHere.Domain.csproj"
             }
           }
         }

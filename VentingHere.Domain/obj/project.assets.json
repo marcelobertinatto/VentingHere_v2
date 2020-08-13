@@ -1165,11 +1165,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Marcelo\\Sandbox\\GIT\\VentingHere_v3\\VentingHere\\VentingHere.Domain\\VentingHere.Domain.csproj",
+      "projectUniqueName": "D:\\Marcelo\\Sandbox\\GIT\\VentingHere_v3\\VentingHere\\VentingHere.Domain\\VentingHere.Domain.csproj",
       "projectName": "VentingHere.Domain",
-      "projectPath": "E:\\Marcelo\\Sandbox\\GIT\\VentingHere_v3\\VentingHere\\VentingHere.Domain\\VentingHere.Domain.csproj",
+      "projectPath": "D:\\Marcelo\\Sandbox\\GIT\\VentingHere_v3\\VentingHere\\VentingHere.Domain\\VentingHere.Domain.csproj",
       "packagesPath": "C:\\Users\\Marce\\.nuget\\packages\\",
-      "outputPath": "E:\\Marcelo\\Sandbox\\GIT\\VentingHere_v3\\VentingHere\\VentingHere.Domain\\obj\\",
+      "outputPath": "D:\\Marcelo\\Sandbox\\GIT\\VentingHere_v3\\VentingHere\\VentingHere.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

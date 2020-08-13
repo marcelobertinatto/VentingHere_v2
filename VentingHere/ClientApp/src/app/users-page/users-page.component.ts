@@ -24,6 +24,7 @@ export class UsersPageComponent implements OnInit {
   fileUploadProgress: string = null;
   frmSaveUserDetails: FormGroup;
   enableUserSummary: boolean = false;
+  public numOfComplaints: number = 0;
 
   constructor(private userService: AuthService, private usService: UserService,
     private formBuilder: FormBuilder, private cd: ChangeDetectorRef, private router: Router) { }
@@ -144,13 +145,14 @@ export class UsersPageComponent implements OnInit {
         const returnedU = data[d[2]] as Usersummary;
         if (returnedU != null && msgId === 2) {
           _this.userSummary = returnedU;
+          _this.numOfComplaints = returnedU.totalOfComplaints;
         }
       }
     );
   }
 
   getcomplaintdetailspage(comp: Companysubjecttellus) { 
-    this.router.navigateByUrl('/complaintdetails/', { state: {id: comp} });
+    this.router.navigateByUrl('/complaintdetails/', { state: comp });
   }
 
 }

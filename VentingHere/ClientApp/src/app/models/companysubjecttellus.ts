@@ -1,6 +1,7 @@
 import { NumberValueAccessor } from "@angular/forms";
 
 export class Companysubjecttellus {
+    id: number;
     companyid: number;
     companyname: string;
     websiteaddress: string;
