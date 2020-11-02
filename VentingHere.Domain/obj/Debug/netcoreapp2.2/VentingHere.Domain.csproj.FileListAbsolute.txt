@@ -19,7 +19,6 @@ E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Domain\obj\Debug\n
 D:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Domain\bin\Debug\netcoreapp2.2\VentingHere.Domain.deps.json
 D:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Domain\bin\Debug\netcoreapp2.2\VentingHere.Domain.dll
 D:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Domain\bin\Debug\netcoreapp2.2\VentingHere.Domain.pdb
-D:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Domain\obj\Debug\netcoreapp2.2\VentingHere.Domain.csprojAssemblyReference.cache
 D:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Domain\obj\Debug\netcoreapp2.2\VentingHere.Domain.csproj.CoreCompileInputs.cache
 D:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Domain\obj\Debug\netcoreapp2.2\VentingHere.Domain.AssemblyInfoInputs.cache
 D:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Domain\obj\Debug\netcoreapp2.2\VentingHere.Domain.AssemblyInfo.cs

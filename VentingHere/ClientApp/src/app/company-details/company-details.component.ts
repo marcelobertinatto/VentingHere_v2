@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Company } from '../models/company';
 
 @Component({
   selector: 'app-company-details',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompanyDetailsComponent implements OnInit {
 
+  companyDetails: Company;
+
   constructor() { }
 
   ngOnInit() {
+    this.companyDetails = history.state;
   }
 
 }

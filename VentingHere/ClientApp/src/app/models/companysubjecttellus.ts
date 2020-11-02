@@ -1,4 +1,4 @@
-import { NumberValueAccessor } from "@angular/forms";
+import { Subject } from "rxjs";
 
 export class Companysubjecttellus {
     id: number;
@@ -12,5 +12,5 @@ export class Companysubjecttellus {
     subjectId: number;
     subjectDescribed: string;
     subjectIssueId: number;
-    subjectIssueDescribed: string;
+    subjectIssueDescribed: string;    
 }

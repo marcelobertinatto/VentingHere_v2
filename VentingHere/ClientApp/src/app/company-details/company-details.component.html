@@ -3,9 +3,102 @@
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="card mb-3 card_custom">
-        <img src="https://technext.github.io/classimax/images/user/user-thumb.jpg" alt=""
-            class="rounded-circle mx-auto d-block mt-2 img_51" />
+        <img src="{{'data:image/jpg;base64,' + companyDetails.logo}}" alt="" class="rounded-circle mx-auto d-block mt-2 img_51" />
+            <div class="card-body">
+              <h5 class="card-title h5_custom">{{companyDetails.companyname}}</h5>              
+            </div>
       </div>
+      <div class="card card_custom mb-3">
+        <div class="card-body">
+          <ul class="list-inline ml-3">
+            <li class="list-inline-item mb-2">
+              <i class="fas fa-medal fa-2x"></i>
+            </li>
+            <li class="list-inline-item mb-2 align-middle">
+              <p class="card-text p_custom">Rating: 9.9</p>
+            </li>
+          </ul>    
+          <ul class="list-inline ml-3">
+            <li class="list-inline-item mb-2">
+              <i class="fas fa-angry fa-2x"></i>
+            </li>
+            <li class="list-inline-item mb-2 align-middle">
+              <p class="card-text p_custom">No. of Complaints: 100</p>
+            </li>
+          </ul>          
+          <!-- <ul class="list-inline ml-3">
+            <a href="#">
+            <li class="list-inline-item mb-2">
+              <i class="fas fa-reply fa-2x"></i>
+            </li>
+            <li class="list-inline-item mb-2 align-middle">
+              <p class="card-text p_custom">No. of answered Complaints: 98</p>
+            </li>
+          </a>
+          </ul> -->
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
+        <div class="widget">
+          <nav>
+            <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+              <a class="nav-item nav-link active" id="nav-latest-complaints-tab" data-toggle="tab" href="#nav-latest-complaints" role="tab" aria-controls="nav-latest-complaints" aria-selected="true">Lastest Complaints</a>
+              <a class="nav-item nav-link" id="nav-bad-complaints-tab" data-toggle="tab" href="#nav-bad-complaints" role="tab" aria-controls="nav-bad-complaints" aria-selected="false">Bad Rate Complaints</a>
+              <a class="nav-item nav-link" id="nav-good-complaints-tab" data-toggle="tab" href="#nav-good-complaints" role="tab" aria-controls="nav-good-complaints" aria-selected="false">Good Rate Complaints</a>
+            </div>
+          </nav>
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-latest-complaints" role="tabpanel" aria-labelledby="nav-latest-complaints-tab">
+              <div class="widget">
+                <h3 class="widget-header">Edit Personal Information</h3>
+                <div class="form-group">
+                  <label for="username">User Name</label>
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+              <div class="widget">
+                <h3 class="widget-header">Edit Personal Information</h3>
+                <div class="form-group">
+                  <label for="username">User Name</label>
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+            </div>            
+            <div class="tab-pane fade" id="nav-bad-complaints" role="tabpanel" aria-labelledby="nav-bad-complaints-tab">
+              <div class="widget">
+                <h3 class="widget-header">Edit Personal Information</h3>
+                <div class="form-group">
+                  <label for="username">User Name</label>
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+              <div class="widget">
+                <h3 class="widget-header">Edit Personal Information</h3>
+                <div class="form-group">
+                  <label for="username">User Name</label>
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="nav-good-complaints" role="tabpanel" aria-labelledby="nav-good-complaints-tab">
+              <div class="widget">
+                <h3 class="widget-header">Edit Personal Information</h3>
+                <div class="form-group">
+                  <label for="username">User Name</label>
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+              <div class="widget">
+                <h3 class="widget-header">Edit Personal Information</h3>
+                <div class="form-group">
+                  <label for="username">User Name</label>
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
   </div>
 </div>

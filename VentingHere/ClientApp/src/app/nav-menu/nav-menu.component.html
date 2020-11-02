@@ -66,8 +66,8 @@
 						<a class="nav-link dropdown-toggle" id="navbarDropdown" data-target=".navbar-collapse" data-toggle="navbarDropdown" aria-haspopup="true" aria-expanded="false">
 							<!-- <img src="https://technext.github.io/classimax/images/user/user-thumb.jpg" alt=""
 							class="rounded-circle img_navbar" /> {{user.name}} </a> -->
-							<img src="{{'data:image/jpg;base64,' + user.image}}" alt=""
-							class="rounded-circle img_navbar" /> {{user.name}} </a>
+							<img *ngIf="!user.facebookImage" src="{{'data:image/jpg;base64,' + user.image}}" alt="" class="rounded-circle img_navbar" /> 
+							<img *ngIf="user.facebookImage" src="{{user.image}}" alt="" class="rounded-circle img_navbar" />{{user.name}} </a>
 						<div class="dropdown-menu dropdown-menu-right dropdown-cyan" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" [routerLink]="['/userspage']">My account</a>
 							<a class="dropdown-item" (click)="logout()">Log out</a>

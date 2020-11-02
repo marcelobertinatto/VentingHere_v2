@@ -469,55 +469,6 @@
     outline: rgb(255, 255, 255) none 0px;
 }/*#I_1444:before*/
 
-#DIV_1445 {
-    box-sizing: border-box;
-    float: left;
-    position: relative;
-    text-align: center;
-    width: 100%;
-    font: 13px Quicksand, sans-serif;
-}/*#DIV_1445*/
-
-#DIV_1445:after {
-    text-align: center;
-    font: 13px Quicksand, sans-serif;
-}/*#DIV_1445:after*/
-
-#DIV_1445:before {
-    content: '';
-    display: block;
-    height: 1px;
-    left: 30px;
-    position: absolute;
-    right: 30px;
-    text-align: center;
-    top: 50%;
-    z-index: 1;
-    background: rgb(238, 238, 238) none repeat scroll 0% 0% / auto padding-box border-box;
-    font: 13px Quicksand, sans-serif;
-}/*#DIV_1445:before*/
-
-#SPAN_1446 {
-    box-sizing: border-box;
-    display: inline-block;
-    position: relative;
-    text-align: center;
-    width: 90px;
-    z-index: 2;
-    background: rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box;
-    font: 13px Quicksand, sans-serif;
-}/*#SPAN_1446*/
-
-#SPAN_1446:after {
-    text-align: center;
-    font: 13px Quicksand, sans-serif;
-}/*#SPAN_1446:after*/
-
-#SPAN_1446:before {
-    text-align: center;
-    font: 13px Quicksand, sans-serif;
-}/*#SPAN_1446:before*/
-
 #DIV_1447 {
     box-sizing: border-box;
     float: left;

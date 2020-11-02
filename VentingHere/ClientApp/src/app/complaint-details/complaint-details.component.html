@@ -16,9 +16,9 @@
       </div>
       <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
         <div class="widget">
-          <h3 class="widget-header">{{complaintDetails.subject.subjectText}}</h3>
+          <!--<h3 class="widget-header">{{complaintDetails.subject.subjectText}}</h3>
           <h3 class="widget-header">{{complaintDetails.subjectIssue.subjectIssueText}}</h3>
-          <p class="p_custom1">{{complaintDetails.company.companyName}}</p>
+           <p class="p_custom1">{{complaintDetails.company.companyName}}</p> -->
           <ul class="list-inline">
             <li class="list-inline-item mr-5">ID #{{complaintDetails.id}}</li>
             <li class="list-inline-item mr-5">{{complaintDetails.dateAndTime | date: 'dd/MM/yyyy HH:mm:ss'}}</li>
@@ -26,8 +26,13 @@
           <p style="font-size:17px;">{{complaintDetails.tellUs}}</p>
         </div>
 
-        <div class="block d-flex">
-          <button class="btn btn-main btn-block" [routerLink]="['/userspage']">Back</button>
+        <div class="btn-toolbar">
+          <div class="block d-flex mr-2">
+            <!-- <button class="btn btn-main-success btn-block" (click)="approve(complaintDetails.id)" *ngIf="user.id === '2'">Approve</button> -->
+          </div>
+          <div class="block d-flex">
+            <button class="btn btn-main btn-block" [routerLink]="['/userspage']">Back</button>
+          </div>
         </div>
 
       </div>

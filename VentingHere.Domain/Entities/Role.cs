@@ -5,6 +5,7 @@ namespace VentingHere.Domain.Entities
 {
     public class Role : IdentityRole<int>
     {
-        public virtual List<UserRole> ListUserRoles { get; set; }
+        //public virtual List<UserRole> ListUserRoles { get; set; }
+
     }
 }

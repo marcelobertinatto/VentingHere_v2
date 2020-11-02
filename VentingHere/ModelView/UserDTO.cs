@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace VentingHere.ModelView
 {
@@ -13,7 +14,9 @@ namespace VentingHere.ModelView
         public string City { get; set; }
         public string County { get; set; }
         public string Phone { get; set; }
-        public DateTime?LastLogin{ get; set; }
+        public DateTime? LastLogin{ get; set; }
         public DateTime UserFirstRegister { get; set; }
+        public bool FacebookImage { get; set; }
+        public List<string> Roles { get; set; }
     }
 }

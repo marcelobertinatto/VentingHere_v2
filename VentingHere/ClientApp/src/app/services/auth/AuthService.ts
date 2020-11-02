@@ -42,8 +42,16 @@ export class AuthService {
         return this.http.post<User>(this.baseURL + 'api/user/login', JSON.stringify(u), {headers: this.headers});
     }
 
+    facebooklogin(u: Userlogindto) {
+      return this.http.post<User>(this.baseURL + 'api/user/facebooklogin', JSON.stringify(u), {headers: this.headers});
+    } 
+
     public registerUser(u: User): Observable<User> {
       return this.http.post<User>(this.baseURL + 'api/user/registeruser', JSON.stringify(u), {headers: this.headers});
+    }
+
+    public facebookregisterUser(u: User): Observable<User> {
+      return this.http.post<User>(this.baseURL + 'api/user/facebookregisteruser', JSON.stringify(u), {headers: this.headers});
     }
 
     public saveUserDetails(u: Userdetailsdto): Observable<User> {

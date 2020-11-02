@@ -12,4 +12,6 @@ export class User {
     phone: string;
     lastLogin: Date;
     userFirstRegister: Date;
+    facebookImage: boolean;
+    roles: []
 }

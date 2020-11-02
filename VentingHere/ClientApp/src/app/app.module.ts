@@ -20,8 +20,10 @@ import { CompanyDetailsComponent } from './company-details/company-details.compo
 import { ComplaintDetailsComponent } from './complaint-details/complaint-details.component';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { FacebookLoginProvider } from 'angularx-social-login';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
+  entryComponents: [UserRegisterComponent],
    declarations: [
       AppComponent,
       NavMenuComponent,
@@ -38,13 +40,14 @@ import { FacebookLoginProvider } from 'angularx-social-login';
    imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
+    NgxPaginationModule,
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeBodyComponent, pathMatch: 'full' },
       { path: 'login', component: UserLoginComponent },
       { path: 'userspage', component: UsersPageComponent },
       { path: 'usercomplaint', component: UserComplaintComponent },
-      { path: 'companydetails', component: CompanyDetailsComponent},
+      { path: 'companydetails/:id', component: CompanyDetailsComponent},
       { path: 'complaintdetails/:id', component: ComplaintDetailsComponent}
     ]),
     NgbModule,
@@ -58,6 +61,18 @@ import { FacebookLoginProvider } from 'angularx-social-login';
     provide: HTTP_INTERCEPTORS,
     useClass: Authinterceptor,
     multi: true
+  },
+  {
+    provide: 'SocialAuthServiceConfig',
+    useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('1529630943909561'),
+          },
+        ],
+    } as SocialAuthServiceConfig
   }],
   bootstrap: [AppComponent]
 })
