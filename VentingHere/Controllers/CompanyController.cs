@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using VentingHere.Application.Interface;
 using VentingHere.Domain.Entities;
 using VentingHere.ModelView;
@@ -21,6 +20,7 @@ namespace VentingHere.Controllers
         private readonly IHandleMessage<List<SubjectDTO>> _handleMessageSubject;
         private readonly IHandleMessage<List<SubjectIssueDTO>> _handleMessageSubjectIssue;
         private readonly IServiceAppCompany _serviceAppCompany;
+        private readonly IServiceAppCompanyRate _serviceAppCompanyRate;
         private readonly IServiceAppSubject _serviceAppSubject;
         private readonly IServiceAppSubjectIssue _serviceAppSubjectIssue;
         private readonly IServiceAppCompanySubjectIssue _serviceAppCompanySubjectIssue;
@@ -33,6 +33,7 @@ namespace VentingHere.Controllers
             IHandleMessage<List<SubjectDTO>> handleMessageSubject,
             IHandleMessage<List<SubjectIssueDTO>> handleMessageSubjectIssue,
             IServiceAppCompany serviceAppCompany,
+            IServiceAppCompanyRate serviceAppCompanyRate,
             IServiceAppSubject serviceAppSubject,
             IServiceAppSubjectIssue serviceAppSubjectIssue,
             IServiceAppCompanySubjectIssue serviceAppCompanySubjectIssue,
@@ -43,6 +44,7 @@ namespace VentingHere.Controllers
             _handleMessageSubject = handleMessageSubject;
             _handleMessageSubjectIssue = handleMessageSubjectIssue;
             _serviceAppCompany = serviceAppCompany;
+            _serviceAppCompanyRate = serviceAppCompanyRate;
             _serviceAppSubject = serviceAppSubject;
             _serviceAppSubjectIssue = serviceAppSubjectIssue;
             _serviceAppCompanySubjectIssue = serviceAppCompanySubjectIssue;
@@ -59,6 +61,11 @@ namespace VentingHere.Controllers
         {
             try
             {
+                //generate fake data
+                //var xCompany = new Helper.BogusFakeData(null, _serviceAppCompany, _serviceAppCompanyRate
+                //    , _serviceAppCompanySubjectIssue, _mapper);
+                //xCompany.CreateFakeCompanySubjectIssue(1000);
+
                 if (!String.IsNullOrEmpty(searchTerm))
                 {
                     var company = _serviceAppCompany.Find(x => x.CompanyName.ToUpper().Contains(searchTerm.ToUpper()))

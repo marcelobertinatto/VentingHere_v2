@@ -8,8 +8,13 @@ namespace VentingHere.Infra.EntityConfig
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.HasKey(x => new { x.Id });
-            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            builder.HasMany(x => x.UserRoles)
+                .WithOne(x => x.User)
+                .HasForeignKey(x => x.UserId)
+                .IsRequired();
+
+            //builder.HasKey(x => new { x.Id });
+            //builder.Property(x => x.Id).ValueGeneratedOnAdd();
 
             ////one to many: User and Answer
             //builder.HasMany(x => x.ListReplies)

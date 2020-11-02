@@ -24,6 +24,9 @@ export class UsersPageComponent implements OnInit {
   fileUploadProgress: string = null;
   frmSaveUserDetails: FormGroup;
   enableUserSummary: boolean = false;
+  enableAdminUserSummary: boolean = false;
+  public numOfComplaints: number = 0;
+  config: any;
 
   constructor(private userService: AuthService, private usService: UserService,
     private formBuilder: FormBuilder, private cd: ChangeDetectorRef, private router: Router) { }
@@ -41,6 +44,12 @@ export class UsersPageComponent implements OnInit {
   // tslint:disable-next-line: use-lifecycle-interface
   ngAfterViewInit(): void {
     this.frmSaveUserDetails.patchValue({username: this.user.userName, fullname: this.user.name});
+
+    this.config = {
+      itemsPerPage: 3,
+      currentPage: 1,
+      totalItems: this.numOfComplaints//this.userSummary.totalOfComplaints
+    };
   }
 
   validation () {
@@ -144,13 +153,26 @@ export class UsersPageComponent implements OnInit {
         const returnedU = data[d[2]] as Usersummary;
         if (returnedU != null && msgId === 2) {
           _this.userSummary = returnedU;
+          _this.numOfComplaints = returnedU.totalOfComplaints;
         }
       }
     );
   }
 
   getcomplaintdetailspage(comp: Companysubjecttellus) { 
-    this.router.navigateByUrl('/complaintdetails/', { state: {id: comp} });
+    this.router.navigateByUrl('/complaintdetails/', { state: comp });
+  }
+
+  pageChanged(event){
+    this.config.currentPage = event;
+  }
+
+  approve(item: number){
+    window.alert(item);
+  }
+
+  enableAd() {
+    
   }
 
 }

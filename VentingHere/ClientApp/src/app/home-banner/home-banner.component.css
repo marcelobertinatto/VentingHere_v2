@@ -3,7 +3,7 @@
 }
 
 .bg-1 {
-    background: url(../../assets/img/hero.jpg);
+     background: url(../../assets/img/hero.jpg);    
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -115,3 +115,7 @@ a {
     color: #5672f9;
     border: 1px solid #5672f9;
 }
+
+.ng-autocomplete {
+    width: 100%;
+  }

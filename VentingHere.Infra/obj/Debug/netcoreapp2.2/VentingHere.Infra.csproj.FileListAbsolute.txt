@@ -26,3 +26,17 @@ E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\obj\Debug\ne
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\obj\Debug\netcoreapp2.2\VentingHere.Infra.csproj.CopyComplete
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\obj\Debug\netcoreapp2.2\VentingHere.Infra.dll
 E:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\obj\Debug\netcoreapp2.2\VentingHere.Infra.pdb
+D:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\bin\Debug\netcoreapp2.2\VentingHere.Infra.deps.json
+D:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\bin\Debug\netcoreapp2.2\VentingHere.Infra.dll
+D:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\bin\Debug\netcoreapp2.2\VentingHere.Infra.pdb
+D:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\bin\Debug\netcoreapp2.2\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\bin\Debug\netcoreapp2.2\VentingHere.Domain.dll
+D:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\bin\Debug\netcoreapp2.2\VentingHere.Domain.pdb
+D:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\bin\Debug\netcoreapp2.2\Microsoft.AspNetCore.Identity.EntityFrameworkCore.xml
+D:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\obj\Debug\netcoreapp2.2\VentingHere.Infra.csprojAssemblyReference.cache
+D:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\obj\Debug\netcoreapp2.2\VentingHere.Infra.csproj.CoreCompileInputs.cache
+D:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\obj\Debug\netcoreapp2.2\VentingHere.Infra.AssemblyInfoInputs.cache
+D:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\obj\Debug\netcoreapp2.2\VentingHere.Infra.AssemblyInfo.cs
+D:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\obj\Debug\netcoreapp2.2\VentingHere.Infra.csproj.CopyComplete
+D:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\obj\Debug\netcoreapp2.2\VentingHere.Infra.dll
+D:\Marcelo\Sandbox\GIT\VentingHere_v3\VentingHere\VentingHere.Infra\obj\Debug\netcoreapp2.2\VentingHere.Infra.pdb

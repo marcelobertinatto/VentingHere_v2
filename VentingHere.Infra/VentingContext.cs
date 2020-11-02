@@ -10,8 +10,8 @@ using VentingHere.Infra.EntityConfig;
 
 namespace VentingHere.Infra
 {
-    public class VentingContext : IdentityDbContext<User, Role, int,
-                                                    IdentityUserClaim<int>, UserRole, IdentityUserLogin<int>,
+    public class VentingContext : IdentityDbContext<User, Role, int, IdentityUserClaim<int>,
+                                                    UserRole, IdentityUserLogin<int>,
                                                     IdentityRoleClaim<int>, IdentityUserToken<int>>
     {
         public VentingContext(DbContextOptions<VentingContext> options) : base(options)
@@ -25,7 +25,6 @@ namespace VentingHere.Infra
         public DbSet<Answer> Answer { get; set; }
         public DbSet<Vent> Vent { get; set; }
         public DbSet<Contact> Contact{ get; set; }
-        public DbSet<UserRole> UserRole { get; set; }
         public DbSet<Subject> Subject { get; set; }
         public DbSet<SubjectIssue> SubjectIssue { get; set; }
         public DbSet<CompanySubjectIssue> CompanySubjectIssue { get; set; }
@@ -51,9 +50,10 @@ namespace VentingHere.Infra
             modelBuilder.ApplyConfiguration(new RateConfig());
             modelBuilder.ApplyConfiguration(new SectorConfig());
             modelBuilder.ApplyConfiguration(new UserConfig());
+            modelBuilder.ApplyConfiguration(new UserRoleConfig());
+            modelBuilder.ApplyConfiguration(new RoleConfig());
             modelBuilder.ApplyConfiguration(new VentConfig());
             modelBuilder.ApplyConfiguration(new ContactConfig());
-            modelBuilder.ApplyConfiguration(new UserRoleConfig());
             modelBuilder.ApplyConfiguration(new SubjectConfig());
             modelBuilder.ApplyConfiguration(new SubjectIssueConfig());
             modelBuilder.ApplyConfiguration(new CompanyRateConfig());

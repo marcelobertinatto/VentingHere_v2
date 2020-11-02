@@ -7,23 +7,12 @@ using VentingHere.Domain.Entities;
 
 namespace VentingHere.Infra.EntityConfig
 {
-    class UserRoleConfig : IEntityTypeConfiguration<UserRole>
+    public class UserRoleConfig : IEntityTypeConfiguration<UserRole>
     {
         public void Configure(EntityTypeBuilder<UserRole> builder)
         {
-            builder.HasKey(ur => new { ur.UserId, ur.RoleId });
-
-            //many to many: UserRoles with Roles
-            builder.HasOne(ur => ur.Role)
-                .WithMany(r => r.ListUserRoles)
-                .HasForeignKey(x => x.RoleId)
-                .IsRequired();
-
-            //many to many: UserRoles with Users
-            builder.HasOne(ur => ur.User)
-              .WithMany(r => r.ListUserRoles)
-              .HasForeignKey(x => x.UserId)
-              .IsRequired();
+            builder.ToTable("AspNetUserRoles");
+            builder.HasKey(x => new { x.UserId, x.RoleId });
         }
     }
 }

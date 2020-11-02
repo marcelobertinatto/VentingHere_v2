@@ -7,7 +7,7 @@ import { CustomValidators } from '../helpers/customValidators';
 import { Router } from '@angular/router';
 import { User } from '../models/user';
 import Swal from 'sweetalert2';
-// import { SocialAuthService, FacebookLoginProvider, SocialUser } from 'angularx-social-login';
+import { SocialAuthService, FacebookLoginProvider, SocialUser } from 'angularx-social-login';
 
 const ngbModalOptions: NgbModalOptions = {
   backdrop: 'static',
@@ -26,17 +26,18 @@ export class UserLoginComponent implements OnInit {
   loginForm: FormGroup;
   public returnUrl: string;
   public u: User;
-  // userFB: SocialUser;
-  // loggedIn: boolean;
+  userFB: SocialUser;
+  loggedIn: boolean;
+  faceImage: boolean;
 
   constructor(private modal: ModalService, private formBuilder: FormBuilder, private authService: AuthService,
-    private router: Router) { }
-    // , private socialAuthService: SocialAuthService) {
+    private router: Router
+     , private socialAuthService: SocialAuthService) {}
   
 
   ngOnInit(): void {
     this.validation();
-    this.u = new User();
+    this.u = new User();    
   }
 
   validation() {
@@ -63,10 +64,16 @@ export class UserLoginComponent implements OnInit {
 
     return this.authService.login(this.u)
     .subscribe(data => {
-      const resultError = data['Error'];
-      if (data != null && resultError === undefined) {
-        sessionStorage.setItem('user-authenticated', JSON.stringify(data['user']));
-        sessionStorage.setItem('token', JSON.stringify(data['token']));
+      const res = Object.keys(data);
+      const token = data[res[0]];
+      const roles = JSON.parse(window.atob(token.split('.')[1]))['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']; 
+      const returnedValue = data[res[1]] as User;
+      returnedValue.facebookImage = false;
+      returnedValue.roles = roles;
+      const id = data[res[2]] as number;
+      if (id === 2) {
+        sessionStorage.setItem('user-authenticated', JSON.stringify(returnedValue));
+        sessionStorage.setItem('token', JSON.stringify(token));
         this.close();
         if (this.returnUrl == null) {
           this.router.navigate(['/userspage']);
@@ -76,13 +83,12 @@ export class UserLoginComponent implements OnInit {
           Swal.fire({
             position: 'top-end',
             icon: 'error',
-            title: data['Error'],
+            title: returnedValue,
             showConfirmButton: false,
             timer: 3500,
             showCloseButton: true
           });
       }
-    }, error => {
     });
 
   }
@@ -91,17 +97,51 @@ export class UserLoginComponent implements OnInit {
     this.modal.close();
   }
 
-  // signInWithFB(): void {
-  //   this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then(
-  //     (response) => {
-  //       this.userFB = response;
-  //     }
-  //   );
-    
-  // }
+  signInWithFB() {
+    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then(
+      response => {
+        console.log(response);
+        this.userFB = response;
+        this.u.email = this.userFB.email;
+        this.u.name = this.userFB.name;
+        this.u.image = this.userFB.photoUrl;
+
+        return this.authService.facebooklogin(this.u)
+          .subscribe(data => {
+            const res = Object.keys(data);
+            const token = data[res[0]];
+            const returnedValue = data[res[1]] as User;
+            returnedValue.facebookImage = true;
+            const id = data[res[2]] as number;
+          if (id === 2) {
+            sessionStorage.setItem('user-authenticated', JSON.stringify(returnedValue));
+            sessionStorage.setItem('token', JSON.stringify(token));
+            this.close();
+            if (this.returnUrl == null) {
+              this.router.navigate(['/userspage']);
+            }
+            this.router.navigate([this.returnUrl]);
+          } else {
+              Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: returnedValue,
+                showConfirmButton: false,
+                timer: 3500,
+                showCloseButton: true
+              });
+          }
+        });
+      }
+    );  
+  }  
  
-  // signOut(): void {
-  //   this.socialAuthService.signOut();
-  // }
+  signOut() {
+    this.socialAuthService.signOut().then(
+      response => {
+        this.userFB = null;
+      }      
+    );
+  }
 
 }

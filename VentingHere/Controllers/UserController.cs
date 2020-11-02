@@ -17,6 +17,7 @@ using VentingHere.Domain.Entities;
 using VentingHere.ModelView;
 using Microsoft.AspNetCore.Http;
 using System.Linq;
+using VentingHere.Helper;
 
 namespace VentingHere.Controllers
 {
@@ -25,6 +26,7 @@ namespace VentingHere.Controllers
     {
         #region INJECTED SERVICES
         private readonly UserManager<User> _userManager;
+        private readonly RoleManager<Role> _roleManager;
         private readonly SignInManager<User> _signInManager;
         private readonly IServiceAppUser _serviceAppUser;
         private readonly IMapper _mapper;
@@ -32,23 +34,31 @@ namespace VentingHere.Controllers
         private readonly IHandleMessage<UserDetailsDTO> _handleMessageUser;
         private readonly IHandleMessage<UserSummary> _handleMessageUserSummary;
         private readonly IServiceAppCompanySubjectIssue _serviceAppCompanySubjectIssue;
+        private readonly IServiceAppCompany _serviceAppCompany;
+        private readonly IServiceAppCompanyRate _serviceAppCompanyRate;
         #endregion
 
-        public UserController(IServiceAppUser serviceAppUser, UserManager<User> userManager, SignInManager<User> signInManager,
+        public UserController(IServiceAppUser serviceAppUser, UserManager<User> userManager, RoleManager<Role> roleManager,
+            SignInManager<User> signInManager,
             IMapper mapper,
             IConfiguration config,
+            IServiceAppCompany serviceAppCompany,
             IServiceAppCompanySubjectIssue serviceAppCompanySubjectIssue,
             IHandleMessage<UserSummary> handleMessageUserSummary,
+            IServiceAppCompanyRate serviceAppCompanyRate,
             IHandleMessage<UserDetailsDTO> handleMessageUser)
         {
             _serviceAppUser = serviceAppUser;
             _userManager = userManager;
+            _roleManager = roleManager;
             _signInManager = signInManager;
             _mapper = mapper;
             _config = config;
             _serviceAppCompanySubjectIssue = serviceAppCompanySubjectIssue;
             _handleMessageUserSummary = handleMessageUserSummary;
             _handleMessageUser = handleMessageUser;
+            _serviceAppCompany = serviceAppCompany;
+            _serviceAppCompanyRate = serviceAppCompanyRate;
         }
 
         public IActionResult Index()
@@ -64,8 +74,11 @@ namespace VentingHere.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var u = await _userManager.Users.FirstOrDefaultAsync(x => x.Email.ToUpper().Equals(user.Email.ToUpper()) && x.Password.Equals(user.Password));
+                    //generate fake data
+                    //var xUser = new BogusFakeData(_userManager, _serviceAppCompany, _serviceAppCompanyRate, _serviceAppCompanySubjectIssue, _mapper);
+                    //xUser.CreateFakeCompanySubjectIssue(1000);
 
+                    var u = await _userManager.Users.FirstOrDefaultAsync(x => x.Email.ToUpper().Equals(user.Email.ToUpper()) && x.Password.Equals(user.Password));
                     if (u != null)
                     {
                         ////verify if the password match the requirements.
@@ -73,16 +86,19 @@ namespace VentingHere.Controllers
 
                         //if (outcome.Succeeded)
                         //{
-                            var userToReturn = _mapper.Map<UserLoginDTO>(u);
-                            u.LastLogin = DateTime.Now;
+                            var userToReturn = _mapper.Map<UserDTO>(u);
+                            userToReturn.LastLogin = DateTime.Now;
+                            userToReturn.FacebookImage = false;
                             var update = await _userManager.UpdateAsync(u);
                             if (update.Succeeded)
                             {
+                                var role = await _userManager.GetRolesAsync(u);
+                                userToReturn.Roles = (List<string>)role;
                                 return Ok(new
                                 {
                                     token = GenerateJWToken(u).Result,
                                     user = u,
-                                    Application.Enum.HandleMessageType.Error
+                                    Application.Enum.HandleMessageType.Success
                                 });
                             }
                             else
@@ -117,6 +133,55 @@ namespace VentingHere.Controllers
             }
         }
 
+        [HttpPost("facebooklogin")]
+        [AllowAnonymous]
+        public async Task<IActionResult> FacebookLogin([FromBody]UserLoginDTO user)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var u = await _userManager.Users.FirstOrDefaultAsync(x => x.Email.ToUpper().Equals(user.Email.ToUpper()));
+                    if (u != null)
+                    {                        
+                        var userToReturn = _mapper.Map<UserLoginDTO>(u);
+                        u.LastLogin = DateTime.Now;
+                        var update = await _userManager.UpdateAsync(u);
+                        if (update.Succeeded)
+                        {
+                            return Ok(new
+                            {
+                                token = GenerateJWToken(u).Result,
+                                user = u,
+                                Application.Enum.HandleMessageType.Success
+                            });
+                        }
+                        else
+                        {
+                            var result = _handleMessageUser.Add(Application.Enum.HandleMessageType.Error, "Problem to log in!", null);
+                            return Ok(result);
+                        }                        
+                    }
+                    else
+                    {
+                        var result = _handleMessageUser.Add(Application.Enum.HandleMessageType.Error, "User does not exist!", null);
+                        return Ok(result);
+                    }
+
+                }
+                else
+                {
+                    var result = _handleMessageUser.Add(Application.Enum.HandleMessageType.Error, "Problem to log in!", null);
+                    return Ok(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                var result = _handleMessageUser.Add(Application.Enum.HandleMessageType.InternalErrors, "Something went wrong: !" + ex.ToString(), null);
+                return Ok(result);
+            }
+        }
+
         [HttpPost("registeruser")]
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody]UserDTO user)
@@ -142,9 +207,27 @@ namespace VentingHere.Controllers
 
                     if (result.Succeeded)
                     {
-                        //return Created("registeruser", userToReturn);
-                        var re = _handleMessageUser.Add(Application.Enum.HandleMessageType.Success, "User was added successfully!",null);
-                        return Ok(re);
+                        var userRole = await _userManager.AddToRoleAsync(u, "User");
+
+                        if (userRole.Succeeded)
+                        {
+                            //return Created("registeruser", userToReturn);
+                            var re = _handleMessageUser.Add(Application.Enum.HandleMessageType.Success, "User was added successfully!", null);
+                            return Ok(re); 
+                        }
+                        else
+                        {
+                            string errors = null;
+                            if (result.Errors != null)
+                            {
+                                foreach (var err in result.Errors)
+                                {
+                                    errors = errors + err.Description + "\n";
+                                }
+                            }
+                            var re1 = _handleMessageUser.Add(Application.Enum.HandleMessageType.Error, string.IsNullOrEmpty(errors) ? "Something went wrong!" : errors, null);
+                            return Ok(re1);
+                        }
                     }
                     else
                     {
@@ -156,7 +239,7 @@ namespace VentingHere.Controllers
                                 errors = errors + err.Description + "\n";
                             } 
                         }
-                        var re1 = _handleMessageUser.Add(Application.Enum.HandleMessageType.Error, string.IsNullOrEmpty(errors) ? "Something went wron!" : errors,null);
+                        var re1 = _handleMessageUser.Add(Application.Enum.HandleMessageType.Error, string.IsNullOrEmpty(errors) ? "Something went wrong!" : errors,null);
                         return Ok(re1);
                     }
                 }
@@ -169,6 +252,61 @@ namespace VentingHere.Controllers
             catch (System.Exception ex)
             {
                 var result = _handleMessageUser.Add(Application.Enum.HandleMessageType.InternalErrors, "Something went wrong !",null);
+                return Ok(result);
+            }
+
+        }
+
+        [HttpPost("facebookregisteruser")]
+        [AllowAnonymous]
+        public async Task<IActionResult> FacebookRegister([FromBody]UserDTO user)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var u = _mapper.Map<User>(user);
+                    var us = await _userManager.Users.FirstOrDefaultAsync(x => x.Email.ToUpper().Equals(user.Email.ToUpper()));
+                    if (us != null)
+                    {
+                        var re1 = _handleMessageUser.Add(Application.Enum.HandleMessageType.Error, "User already exists!", null);
+                        return Ok(re1);
+                    }
+                    u.UserFirstRegister = DateTime.Now;
+                    if (string.IsNullOrEmpty(u.Image))
+                    {
+                        u.Image = "R0lGODlhGAEYAZEAAP///+Xl5ZmZmQAAACwAAAAAGAEYAQAC/4yPqcvtD6OctNqLs968+w+G4kiW5omm6sq27gvH8kzX9o3n+s73/g8MCofEovGITCqXzKbzCY1Kp9Sq9YrNarfcrvcLVgrG4bJxjE6r1+y1+b1ry+dzuD1Gz+vV975pDxjo5kfIIXiIKFC4OJHo+KjIKBkAWVk5SWip6Yh5t/mZ2PkGSnooGlaaCnjKpeoayGr1OgsbO0WLq2crldtbtwvlKzwI3DR8jFZsjMysLMYM7fwDTc0m7VOdnXbNo+0dyW3zPQ4eLkP+bQ6Dzq7Owg5f7k4SXz//Vx9/P5Jvvx/Sz9+/DgHzDTRUUOBBDAkVLrTQUN9DhhHhTbxQ0eJFCv8ZNW6U0NHjxwch242EUBLdSZQpx61s0NLkywQxVc5EUNPmTQM5dd7sSW4nT6AudxItOvNo0J9KvRlt6jQpVG1Mp0Z7arVZ1azIsHLtKvUr2JViqb0sa3Yk2rQb17Kd6LZa27hX4dLVavfusbl6h13sO3Yh4L15B/cqbDgX4sS0/jJWvPixKseSZ/GtPJky5lSXN5Pq7PnTx9CfR5MWffK0JrKqL6VuDYk1bE6vZ4eSbVvQ2dy6w/LO4/X3L9/C5QQvbm0rcmLEl2877pyM0OjMmzsXOpS69Onat3PXjj179PDir5PvTp4S9fTqx6cHfx4+dPPK5Vt3X3/9fPy7uyf/y68fgPTdtxx2/nlHIHIG+hfegQ0yuCB6EdonYHEPSvhdgBMOmCGH+/32HoUf8haihh0WWKKHI9rGnogngsheewrGKKNwNNZI4o04sqjjjD3CqOOOrQV5AJBE5khkkbMlucCQTCqg2pNQkiZlk55VaWVlWDKA2ZZcaunllI+FmSVjZJZp2JlipqkmTWa26SabcCo52JxxAmYnTnXmqWdffPap15903iXooHQVWp5biCa61qJCiuUoo5BGemikj2Zl6aVWZVoppXFx+qmlnTo66qKlInpqoakKuuqfrfL5ap6x2jnrnLXCeWubuaq565m9kvlrmMF6GaqoioLaKLJo6WWqKVTMFutpsqQSqqqctI5pa5e8hiZslFjyyCSSP9p4o4orLhmfi7ipq9aB8tTmYH/uvhuZu6DN+9w/+K7izr63SeOvJbsEDMopBGdWyMGN+aHwYaM0LAwqEAemxcRvyWJxNlVk7NMyHHeMxMf9hCxyQkSU3NDJKBek8sojD+FyQC3HLJEQNBsE8801B6HzzkD0LNLPQIOMzdBL2Ww0UjwnnU7OTFPl9NNyRS11XUtXffE0WGdd9NZ4Xe01YUiHLTbYZPsy89kOj6322ma3vTDbcMf99tyupG333VTnjXDdfJcm99+lkFAAADs=";
+                    }
+                    var result = await _userManager.CreateAsync(u);
+
+                    if (result.Succeeded)
+                    {
+                        var re = _handleMessageUser.Add(Application.Enum.HandleMessageType.Success, "User was added successfully!", null);
+                        return Ok(re);
+                    }
+                    else
+                    {
+                        string errors = null;
+                        if (result.Errors != null)
+                        {
+                            foreach (var err in result.Errors)
+                            {
+                                errors = errors + err.Description + "\n";
+                            }
+                        }
+                        var re1 = _handleMessageUser.Add(Application.Enum.HandleMessageType.Error, string.IsNullOrEmpty(errors) ? "Something went wron!" : errors, null);
+                        return Ok(re1);
+                    }
+                }
+                else
+                {
+                    var result = _handleMessageUser.Add(Application.Enum.HandleMessageType.Error, "User model is not valid!", null);
+                    return Ok(result);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                var result = _handleMessageUser.Add(Application.Enum.HandleMessageType.InternalErrors, "Something went wrong !", null);
                 return Ok(result);
             }
 
@@ -244,6 +382,14 @@ namespace VentingHere.Controllers
                 {
                     var u = _serviceAppCompanySubjectIssue.Find(x => x.UserId == userId).Distinct().ToList();
 
+                    u.Select(x =>
+                   {
+                       if (x.UserId == 0) x.UserId = userId;
+                       return x;
+                   }).ToList();
+
+                    //u.Where(x => x.UserId == 0).ToList().ForEach(x => x.UserId = userId);
+
                     if (u != null)
                     {
                         var userSummary = new UserSummary();
@@ -299,11 +445,21 @@ namespace VentingHere.Controllers
                 Expires = DateTime.Now.AddDays(1),
                 SigningCredentials = creds
             };
+
+            var tokenSecurityToken = new JwtSecurityToken(
+                issuer: "http://localhost:56590/",
+                audience: "http://localhost:56590/",
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(30),
+                signingCredentials: creds
+            );
+
             var tokenHandler = new JwtSecurityTokenHandler();
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            return tokenHandler.WriteToken(token);
+            //return tokenHandler.WriteToken(token);
+            return tokenHandler.WriteToken(tokenSecurityToken);
         }
         #endregion
     }

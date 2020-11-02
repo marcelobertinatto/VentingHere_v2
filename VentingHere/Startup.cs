@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -89,7 +88,7 @@ namespace VentingHere
                             .Build();
                 opt.Filters.Add(new AuthorizeFilter(policy));
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                  .AddJsonOptions(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+                  .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             #endregion
 
             #region ANSWER
@@ -102,6 +101,12 @@ namespace VentingHere
             services.AddScoped<IRepositoryCompany, RepositoryCompany>();
             services.AddScoped<IServiceCompany, ServiceCompany>();
             services.AddScoped<IServiceAppCompany, ServiceAppCompany>();
+            #endregion
+
+            #region COMPANY RATE
+            services.AddScoped<IRepositoryCompanyRate, RepositoryCompanyRate>();
+            services.AddScoped<IServiceCompanyRate, ServiceCompanyRate>();
+            services.AddScoped<IServiceAppCompanyRate, ServiceAppCompanyRate>();
             #endregion
 
             #region RATE
@@ -143,12 +148,6 @@ namespace VentingHere
             services.AddScoped<IServiceAppRole, ServiceAppRole>();
             #endregion
 
-            #region USERROLE
-            services.AddScoped<IRepositoryUserRole, RepositoryUserRole>();
-            services.AddScoped<IServiceUserRole, ServiceUserRole>();
-            services.AddScoped<IServiceAppUserRole, ServiceAppUserRole>();
-            #endregion
-
             #region SUBJECT
             services.AddScoped<IRepositorySubject, RepositorySubject>();
             services.AddScoped<IServiceSubject, ServiceSubject>();
@@ -167,13 +166,14 @@ namespace VentingHere
             services.AddScoped<IServiceAppCompanySubjectIssue, ServiceAppCompanySubjectIssue>();
             #endregion
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+            services.AddMvc(option => option.EnableEndpointRouting = false);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

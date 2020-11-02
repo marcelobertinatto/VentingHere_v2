@@ -6,7 +6,7 @@ namespace VentingHere.Domain.Entities
 {
     public class User : IdentityUser<int>
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Password { get; set; }
@@ -19,7 +19,7 @@ namespace VentingHere.Domain.Entities
         public DateTime UserFirstRegister { get; set; }
         public virtual IEnumerable<Vent> ListVents { get; set; }
         public virtual IEnumerable<Answer> ListReplies { get; set; }
-        public virtual List<UserRole> ListUserRoles { get; set; }
+        public virtual ICollection<UserRole> UserRoles { get; set; }
         public virtual IEnumerable<CompanyRate> ListCompanyRates { get; set; }
     }
 }
